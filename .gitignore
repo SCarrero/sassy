@@ -6,5 +6,5 @@ dist
 *.cache
 *.idea
 *.lock
-src/ss/**/*
-src/js/**/*
+src/html/ss/**/*
+src/html/js/**/*
