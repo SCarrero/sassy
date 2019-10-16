@@ -1,4 +1,4 @@
 # sassy
-Sherry's standalone Sass compiler with Browsersync
 
-More to come once it's working
+My Foundation Sass compiler with Browsersync, intended for standalone work that isn't part of an existing site or repo.
+
