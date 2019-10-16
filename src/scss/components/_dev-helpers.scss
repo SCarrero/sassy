@@ -1,0 +1,380 @@
+/*
+During local builds, show the current breakpoint
+==================================================
+*/
+
+.debug * {
+    background: #000 !important;
+    color: #0f0 !important;
+    outline: solid #f00 1px !important;
+}
+
+body::before {
+  position: fixed; 
+  top: 3px; 
+  left: 3px; 
+  z-index: 1000; 
+  padding: 1ch;
+  background: rgba($black,0.45); 
+  color: $white;
+  font-weight: 500;
+  font-size: rem-calc(15);
+  @include breakpoint(small only) {
+    content: "Breakpoint: small";
+  }
+  @include breakpoint(medium only) {
+    content: "Breakpoint: medium";
+  }
+  @include breakpoint(large only) {
+    content: "Breakpoint: large";  
+  }
+  @include breakpoint(xlarge only) {
+    content: "Breakpoint: xlarge";  
+  }
+  @include breakpoint(xxlarge only) {
+    content: "Breakpoint: xxlarge";  
+  }
+}
+
+/*
+Outline "invalid" markup.
+==================================================
+*/
+
+:not(dl) > div > dd,
+:not(dl) > div > dt,
+:not(dl):not(div) > dd,
+:not(dl):not(div) > dt,
+dl > :not(dt):not(dd):not(div),
+dl > dd:first-child,
+dl > div > :not(dt):not(dd),
+dl > div > dd:first-child,
+
+fieldset > :not(legend):first-child,
+fieldset > legend:not(:first-child),
+:not(fieldset) > legend,
+
+:not(ul):not(ol) > li,
+ol > :not(li),
+ul > :not(li),
+
+a[target]:not(.offsite):not([rel*="external"]):not([rel*="noopener"]),
+a[target]:not(.offsite):not([rel*="external"]):not([rel*="noreferrer"]),
+
+input:not([type]),
+input[type="radio"]:not([name]),
+
+img:not([alt]),
+img:not([src]),
+
+label:not([for]),
+button:not([type]),
+abbr:not([title]),
+
+:not(table) > thead,
+:not(table) > tbody,
+:not(tr) > th,
+:not(tr) > td,
+tr:empty,
+thead + thead,
+tfoot:not(:last-child),
+
+body link,
+
+b,
+
+em div,
+i div,
+label div,
+q div,
+span > div:not([id]):not([class]),
+strong div,
+p div,
+
+.reveal[aria-labelledby=""], 
+
+.row > .row,
+.row > div:not(.column):not(.columns) > .row,
+.row > div:not(.column):not(.columns)  > div:not(.column):not(.columns) > .row,
+.column > .column,
+.column > div:not(.row) > .column,
+.column > div:not(.row) > div:not(.row) > .column  {
+  border: 2px dotted get-color(alert);
+  &::before {
+    position: relative; 
+    z-index: 1000; 
+    text-align: center;
+    background: get-color(alert); 
+    color: $white;
+    font-weight: 500;
+    display: block;
+  }
+}
+
+/*
+Invalid `dd` nesting.
+==================================================
+*/
+
+:not(dl):not(div) > dd::before {
+  content: "<dd> is missing a parent <dl> or <div>";
+}
+
+:not(dl):not(div) > dt::before {
+  content: "<dt> is missing a parent <dl> or <div>";
+}
+
+:not(dl) > div > dd::before {
+  content: "<dd> with parent <div> is missing <dl> grandparent";
+}
+
+:not(dl) > div > dt::before {
+  content: "<dt> with parent <div> is missing <dl> grandparent";
+}
+
+dl > :not(dt):not(dd):not(div)::before {
+  content: "Immediate child of <dl> must be <dt>, <dd>, or <div>";
+}
+
+dl > dd:first-child::before {
+  content: "<dt> or <div> should be :first-child of <dl>, not <dd>";
+}
+
+dl > div > dd:first-child::before {
+  content: "<dt> should be :first-child of <div> within <dl>, not <dd>";
+}
+
+dl > div > :not(dt):not(dd)::before {
+  content: "Immediate child of <div> within <dl> must be <dt> or <dd>.";
+}
+
+/*
+Invalid `legend` position in `fieldset`.
+==================================================
+*/
+
+fieldset > :not(legend):first-child::before {
+  content: "Invalid :first-child of <legend>";
+}
+
+fieldset > legend:not(:first-child)::before,
+:not(fieldset) > legend::before {
+  content: "<legend> must be :first-child of <fieldset>";
+}
+
+/*
+Invalid `li` nesting.
+==================================================
+*/
+
+:not(ul):not(ol) > li::before {
+  content: "<li> is missing a parent <ul> or <ol>";
+}
+
+ol > :not(li)::before {
+  content: "Immediate child of <ol> must be <li>";
+}
+
+ul > :not(li)::before {
+  content: "Immediate child of <ul> must be <li>";
+}
+ul.orbit-container > div.orbit-controls {
+  border-width: 0;
+  &::before {
+    display: none;
+  } 
+}
+/*
+Form Issues.
+==================================================
+*/
+
+input:not([type])::before {
+  content: '<input> needs [type="…"]';
+}
+
+input[type="radio"]:not([name])::before {
+  content: '<input type="radio"> needs [name="…"].';
+}
+
+/*
+Missing `src` or `alt` on `image`.
+==================================================
+*/
+
+img:not([alt])::before {
+  content: '<img> needs [alt="…"]';
+}
+
+img:not([src])::before {
+  content: '<img> needs [src="…"]';
+}
+
+/*
+Missing `for` on `label`.
+==================================================
+*/
+
+label:not([for])::before {
+  content: '<label> needs [for="…"] to match <input> [id="…"]';
+}
+
+/*
+Missing `type` on `button`.
+==================================================
+*/
+
+button:not([type])::before {
+  content: '<button> needs [type="…"]';
+}
+
+/*
+Missing `title` in `abbr`.
+==================================================
+*/
+
+abbr:not([title])::before {
+  content: '<abbr> needs [title="…"]';
+}
+
+/*
+Malformed table elements.
+==================================================
+*/
+
+:not(table) > thead::before {
+  content: '<thead> should be a direct child of <table>';
+}
+:not(table) > tbody::before {
+  content: '<tbody> should be a direct child of <table>';
+}
+:not(tr) > th::before {
+  content: '<th> should be a direct child of <tr>';
+}
+:not(tr) > td::before {
+  content: '<td> should be a direct child of <tr>';
+}
+tr > :not(td):not(th) {
+  content: '<tr> contains invalid child';
+}
+tr:empty::before {
+  content: '<tr> is empty';
+}
+
+thead + thead::before {
+  content: 'table should not contain more than one <thead>';
+}
+tfoot:not(:last-child){
+  content: '<tfoot> should be last child of <table>';
+}
+/*
+Warnings for `link` tags.
+=================================================
+*/
+
+body link::before {
+  content: "<body> should not contain <link>";
+}
+
+body link[href]:not([href=""])::before {
+  content: '<body> should not contain <link href="' attr(href) '">';
+}
+
+/*
+Use of <b> instead of <strong>.
+=================================================
+*/
+
+b::after {
+  content: "Consider using <strong> instead of <b>";
+}
+
+/*
+Improperly nested `div`.
+=================================================
+*/
+
+em div::before {
+  content: "<div> is not allowed within <em>";
+}
+
+i div::before {
+  content: "<div> is not allowed within <i>";
+}
+
+label div::before {
+  content: "<div> is not allowed within <label>";
+}
+
+q div::before {
+  content: "<div> is not allowed within <q>";
+}
+
+span div:not([id]):not([class])::before {
+  content: "<div> is not allowed within <span>";
+}
+
+strong div::before {
+  content: "<div> is not allowed within <strong>";
+}
+
+/*
+Improperly nested `div` inside `p`.
+=================================================
+*/
+
+/*
+  NOTE: Chrome and Firefox render this oddly.
+
+  ```
+  <!-- ACTUAL. -->
+  <p class="foo">
+    <div class="bar">Invalid</div>
+  </p>
+  ```
+
+  ```
+  <!-- RENDERED. -->
+  <p class="foo">
+  </p>
+  <div class="bar">
+    Invalid
+  </div>
+  <p></p>
+  ```
+*/
+
+p + div:not(:empty) + p:empty {
+  box-shadow: none !important;
+  top: calc(-1 * var(--spacing));
+}
+
+p div::before,
+p + div:not(:empty) + p:empty::before {
+  content: "<div> is not allowed within <p>" !important
+  ;
+}
+
+/*
+Missing aria-labels.
+=================================================
+*/
+
+.reveal[aria-labelledby=""]::before {
+  content: 'Warning: <div class="reveal"> is missing aria-labelledby value.';
+}
+
+/*
+Improperly nested rows and columns.
+=================================================
+*/
+
+.row > .row::before,
+.row > div:not(.column):not(.columns) > .row::before {
+  content: "Warning: Improperly nested row.";
+}
+.column > .column::before,
+.column > div:not(.row) > .column::before {
+  content: "Warning: Improperly nested column.";
+}
+

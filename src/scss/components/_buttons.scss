@@ -1,0 +1,109 @@
+//
+// Custom Overrides to the Foundation Button Design
+//
+
+.button {
+  font-weight: $global-weight-bold;
+	text-transform: uppercase;
+  border: $button-hollow-border-width solid $button-background;
+  // letter-spacing: 0.04em;
+  -webkit-appearance: none;  
+  @include breakpoint (small only) {
+    margin-bottom: 0.25em;
+  }
+  @media (max-width: 25em){
+    padding: 0.85em 1.325em;
+    font-size: 0.8125rem;
+  }
+  &::after,
+  &::before {
+    transition: $button-transition;
+  }
+  &.small {
+    padding: 0.85em 1.5em;
+  }
+  &.large {
+    font-size: calc(16px +  6 * (100vw - 320px) / 1180); 
+    padding: 0.85em 1.5em;
+    letter-spacing: initial;
+    @include breakpoint(large) {
+    } 
+    @include breakpoint(xxlarge) {
+      font-size: rem-calc(22);
+      border-width: 3px;
+    } 
+  }
+  &:hover,
+  &:focus,
+  &:active  {
+		background: $button-background-hover;
+    color: $button-background;    
+	}
+  @each $name, $color in $button-palette {
+    &.#{$name} {
+      color: $white;
+      border-color: $color;
+      &:hover,
+      &:focus,
+      &:active {
+        color: $color;
+        border-color: currentColor;
+        background: $button-background-hover;
+      }
+    }
+  } 
+	&.hollow { 
+    color: $white;
+    border-color: $white; 
+    &:hover,
+    &:focus,
+    &:active {
+      color: $white;
+      border-color: $white; 
+      background: rgba($white, 0.25);
+    }
+	}
+}
+span.button {
+  &:hover {
+    background: inherit !important;
+    cursor: initial;
+  }
+}
+.button-group .button {
+  border-radius: 0;
+}
+p {
+  > .button:not(:last-of-type) {
+    margin-right: 2.5rem;
+  }
+}
+.button > .filemarker {
+  padding-left: 0.25em;
+  font-size: 0.9em;
+}
+
+.button-group .button:first-child {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0; 
+}
+
+.button-group .button:last-child {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0; 
+}
+
+.input-group-button a, 
+.input-group-button button, 
+.input-group-button input, 
+.input-group-button label {
+  height: rem-calc(41.5);
+}     
+@media print {
+  .button {
+    border-width: 0px !important;
+  }
+  .filemarker {
+    display: none;
+  }
+}

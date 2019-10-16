@@ -1,0 +1,83 @@
+.callout {
+  margin: $callout-margin;
+  background-color: $callout-background;
+  position: relative;
+  padding: $callout-padding;
+  &.center-vertically {
+    position: absolute;
+  }
+  &.large {
+    @include breakpoint(medium) {  
+      padding: $callout-padding * 1.25;
+    }
+    @include breakpoint(large) {  
+      padding: $callout-padding * 1.5;
+    }
+  }
+  &.small {
+    padding: $callout-padding * 0.5 $callout-padding * 0.75;
+  }
+  &.xsmall {
+    padding: $callout-padding * 0.5;
+  }
+  &.xlarge {
+    padding: $callout-padding * 2;
+    @include breakpoint(large) {
+      padding: $callout-padding * 3;
+    }
+    @include breakpoint(xlarge) {
+      padding: $callout-padding * 3 7em;
+    }
+    .reveal & {
+      @include breakpoint(xlarge) {
+        padding: 7rem;
+      }
+    }   
+  }
+  > :first-child:not(.button) {
+    margin-top: 0;
+  }
+  > :last-child {
+    margin-bottom: 0;
+  }        
+  .close-button {
+    color: currentColor;
+  }
+  &.hollow-thin,
+  &.hollow {
+    border: $callout-border;
+    color: $fm-gray;
+  }
+  &.hollow {
+    border-width: 3px;
+  }
+  &.border-white {
+    border: 3px solid $white;
+    @include breakpoint(large) {
+      border: 4px solid $white;
+    }
+  }
+  &.callout-overlay {    
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center center;
+  }
+  &.alert {
+    background-color: mix($fm-red, $white, 10%);
+    border: 1px solid $fm-red;
+  }
+  &.primary {
+    background-color: mix($primary-color, $white, 10%);
+    border: 1px solid $primary-color; 
+  }
+}
+
+.rounded {
+  border-radius: 0.35rem;
+  &.large {
+    border-radius: 0.6rem;
+  }
+  &.xlarge {
+    border-radius: 0.65rem;
+  }
+}

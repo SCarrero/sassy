@@ -1,0 +1,121 @@
+// shims to override some defaults
+.no-border { border-width: 0 !important; }
+.no-margin { margin: 0 !important; }
+.no-margin-top { margin-top: 0 !important; }
+.no-margin-bottom { margin-bottom: 0 !important; }
+.no-padding { padding: 0 !important; }
+.no-padding-top { padding-top: 0 !important; }
+.no-padding-bottom { padding-bottom: 0 !important; }
+.no-wrap { white-space: nowrap; }
+.half-margin-bottom { 
+  margin-bottom: 0.5em;
+}
+//use these classes to create variable padding on elements like cards and callouts
+.column {
+  .small-to-default {
+    padding: $callout-padding * 0.5;
+    @include breakpoint(medium) {  
+      padding: $callout-padding * 0.75;
+    }  
+    @include breakpoint(large) {  
+      padding: $callout-padding;
+    }  
+    + .small-to-default {
+      padding-top: 0;
+    }
+  }
+  .small-to-large {
+    padding: $callout-padding * 0.5;
+    @include breakpoint(medium) {  
+      padding: $callout-padding;
+    }
+    @include breakpoint(large) {  
+      padding: $callout-padding * 1.25;
+    }
+    @include breakpoint(xlarge) {  
+      padding: $callout-padding * 1.5;
+    }
+    + .small-to-large {
+      padding-top: 0;
+    }  
+  }
+}
+// content classes to add paddings, margins, gutters etc as needed.
+// for variable padding by breakpoint, look in overrides
+.gutter-top {
+  padding-top: $gutter;
+}
+.gutter-bottom {
+  padding-bottom: $gutter;
+}
+.gutter-left {
+  padding-left: $gutter;
+}
+.gutter-right {
+  padding-right: $gutter;
+}
+.gutter-all {
+  padding: $gutter;
+}
+// Allow gutters to be added only at or below a certain breakpoint.
+@each $size in $breakpoint-classes {  
+  @include breakpoint(#{$size} only) {
+    .gutter-top-#{$size}-only {
+      padding-top: $gutter;
+    }
+    .gutter-bottom-#{$size}-only {
+      padding-bottom: $gutter;
+    }
+    .gutter-left-#{$size}-only {
+      padding-left: $gutter;
+    }
+    .gutter-right-#{$size}-only {
+      padding-right: $gutter;
+    }
+    .gutter-all-#{$size}-only {
+      padding: $gutter;
+    }
+  }
+  @if $size != $-zf-zero-breakpoint {
+    @include breakpoint(#{$size}) {
+      .gutter-top-#{$size} {
+        padding-top: $gutter; 
+      }
+      .gutter-bottom-#{$size} {
+        padding-bottom: $gutter;
+      }
+      .gutter-left-#{$size} {
+        padding-left: $gutter;
+      }
+      .gutter-right-#{$size} {
+        padding-right: $gutter;
+      }
+      .gutter-all-#{$size} {
+        padding: $gutter;
+      }
+    }
+  }
+}
+
+
+.content-band-inner {
+  margin-top: $gutter;
+	@include breakpoint(large) {
+    margin-top: 2rem; 
+	}
+}
+.position-relative {
+  position: relative;
+}
+.position-absolute{
+  position: absolute;
+}
+.center-horizontally {
+  @include horizontal-center;
+}
+.center-vertically {
+  @include vertical-center;
+}  
+.center-absolute {
+  @include absolute-center;
+}

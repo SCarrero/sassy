@@ -1,0 +1,68 @@
+.sidebar {
+  position: relative;  
+  ul, 
+  ol {
+    margin-bottom: 0;
+  }
+  > .row > .column > *:first-child {
+    margin-top: 0;
+  }
+  blockquote {
+    border-left-width: 0;
+    margin-bottom: 0;
+    padding: rem-calc(8 0 8 0);
+    figcaption & {
+      padding: 0;
+    } 
+  }
+  .card {
+    border-bottom-width: 0px;
+  }
+  .large-up-1 {
+    div:last-child > .card {
+      @include breakpoint(large) {
+        margin-bottom: 0;
+      }
+    }
+  }
+}
+.sidebar-txt {
+  max-width: 83%;
+	@include breakpoint(large only) {
+    max-width: rem-calc(277);
+  }  
+  :first-child {
+    margin-top: 0;
+  }
+}
+
+.sidebar-feature {    
+  z-index: 1;
+  @include breakpoint(large) {
+    min-height: 21rem;
+  }
+  .feature-background {   // background will be different for each one, so moving to inline
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center center;    
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    width: 100%;
+    height: auto;
+    opacity: 0.2;
+    z-index: 2;
+  }
+  .row {
+    z-index:3;
+    position: relative;
+  }
+}
+
+.twitter-feed {
+  overflow-y: scroll;
+  height: 44rem;
+  background: $white;
+  border: 1px solid darken($light-gray, 5%);
+}

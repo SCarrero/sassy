@@ -1,0 +1,194 @@
+.reveal.full,
+.reveal.without-overlay[style], 
+.reveal.without-overlay[data-events='resize'] { 
+top: 0 !important;
+left: 0 !important;
+} 
+
+.reveal {  
+  @media screen {
+    color: $white;
+    &.tiny,
+    &.small,
+    &.large {
+      @include reveal-modal-fullscreen;
+    }
+    &:not(.overlay-video):not(.overlay-image):not(.overlay-gallery) {    
+      @include reveal-modal-fullscreen;    
+      padding-top: rem-calc(40);
+      padding-top: calc(40px +  54 * (100vw - 320px)/1180); 
+      @include breakpoint(xxlarge) {
+        padding-top: rem-calc(94);
+      }
+      > div { 
+        position: relative;
+      }
+      > .row {
+        max-width: $global-width;
+      }
+    }
+  }
+ 
+  &.overlay-image,
+  &.overlay-gallery {
+    background: transparent;
+    width:90%;
+    text-align: center;  
+    overflow: visible;
+    max-width: rem-calc(1360);
+    a {
+      @include anchor-on-dark;    
+    } 
+  }  
+  &.overlay-video {
+    background: none;
+    position: absolute;
+    left: 5%;
+    right: 5%; 
+    bottom: 0%;    
+    margin: auto; 
+    max-width: 90%;
+    overflow: visible !important;
+    transform: translateY(7%);  
+    @include breakpoint(xlarge) {
+      max-width: 80%;    
+      transform: translateY(6%); 
+    } 
+    @include breakpoint(xxlarge) {
+      max-width: rem-calc(1360);
+    } 
+  }
+  &.overlay-image,
+  &.overlay-gallery  {
+    .modal-content {
+      max-width: 100%;
+      padding: 2rem 2rem 0;
+      @include breakpoint (xlarge only) {
+        padding: 3rem 1rem 0;
+      }
+      @include breakpoint (small only) {
+        padding: 1.25rem 1.25rem 0;
+      }
+    }
+    figure {    
+      display: inline-block; 
+      margin: 1rem auto 0;
+      max-width: 90vw;
+      position: relative;
+      &include breakpoint(medium) {
+        margin-top: 0;
+      }
+      &include breakpoint(xlarge) {
+        max-width: rem-calc(1360);
+      }
+      img {        
+        max-width: 90vw;
+        max-height:90vh;
+        min-height: rem-calc(200);
+      }
+    }
+    figcaption {
+      font-size: inherit;
+      text-align: center;      
+      font-weight: $global-weight-medium;
+      @extend .orbit-caption;
+      :last-child { 
+        margin-bottom: 0;
+      }     
+      &:not(.reduce) {
+        font-size: rem-calc(14);
+        @include breakpoint(small only) {
+          padding: 0.5em;
+        }
+        @include breakpoint(medium){
+          font-size: rem-calc(16);
+        }
+        @include breakpoint(xlarge){
+          font-size: rem-calc(20);
+        }
+      }
+    }
+    .gallery-previous {  
+      @extend %orbit-control;
+      @include orbit-previous;
+      z-index: 1009;
+    }
+    .gallery-next  {
+      @extend %orbit-control;
+      @include orbit-next;
+      z-index: 1010;
+      }
+    .gallery-previous,
+    .gallery-next {  
+      background-color: rgba($black, 0.2);
+      font-size: 1.2rem;
+    } 
+  }
+}
+.modal-content {
+  margin: 0 auto;
+  width: 90%;
+  max-width: rem-calc(1360);
+  > .row {
+    padding: 0;
+    margin-left: -0.625rem;
+    margin-right: -0.625rem;
+  }
+  &.frame {
+    
+  }
+}
+.modal-header {
+  display: table;
+  width: 100%;
+  margin-bottom: rem-calc(36);
+  margin-bottom: calc(36px +  30 * (100vw - 320px)/1180); 
+  @include breakpoint(xxlarge) {
+    margin-bottom: rem-calc(66);
+  }
+  button { 
+    display: table-cell;
+    vertical-align: middle;
+    right: 0;
+    top: 0;
+    position: relative;
+  }
+  h2 { 
+    display: table-cell;
+    width:99%;
+    vertical-align: middle;
+    font-size: rem-calc(22);
+    font-size: calc(22px +  10 * (100vw - 320px)/1180); 
+    font-weight: $global-weight-bold;
+    margin: 0.4em 0;  
+    @include breakpoint(xxlarge) {
+      margin: 0.53125em 0;  
+      font-size: rem-calc(32);
+    }
+  }
+}
+@media screen {
+  .modal-page-header {
+    background: $light-gray;
+    text-align: center;
+    padding: 4rem 2rem 3rem;
+    h1 {
+      color: $fm-green;
+    }
+    :last-child:not(:first-child) {
+      margin-bottom: 0;
+    }
+  }
+}
+
+@media print {
+  .is-reveal-open .content-band,
+  .is-reveal-open .page-title,
+  .is-reveal-open .pre-footer-promo  { display: none; }
+  body.is-reveal-open,
+  html.is-reveal-open body  { overflow: visible !important; height: auto; position: static; }
+  .reveal.without-overlay { position: static; overflow: visible !important; }
+  .reveal { height: auto; padding-top: 0; max-height: none; }
+  .card-section.text-center { text-align: left; }
+  .reveal .column { width: 100%; }
+}

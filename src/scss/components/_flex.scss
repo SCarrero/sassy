@@ -1,0 +1,21 @@
+
+.vertical-center-equalizers [data-equalizer-watch] {
+  display: flex; 
+  justify-content: center; 
+  flex-direction: column;
+  align-items: center;     
+  > * {      
+    max-width: 100%; // needed for IE bug
+  }    
+}
+.large-vertical-center-equalizers [data-equalizer-watch] {
+  @include breakpoint(large) {
+    display: flex; 
+    justify-content: center; 
+    flex-direction: column;
+    align-items: center;     
+    > * {      
+      max-width: 100%; // needed for IE bug
+    }    
+  }
+}

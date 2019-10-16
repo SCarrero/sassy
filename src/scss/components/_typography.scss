@@ -1,0 +1,82 @@
+
+.uppercase { 
+  text-transform: uppercase;
+}
+.lowercase { 
+  text-transform: lowercase;
+}
+.small-no-transform { 
+  @include breakpoint(small only) {
+    text-transform: none;
+  }
+}
+.smallcaps {
+  font-variant: small-caps;
+}
+.reduce {
+  font-size: 0.875em;
+  line-height: 1.25;
+}
+.large-reduce {
+  line-height: 1.25;
+  @include breakpoint(large) {
+    font-size: 0.875em;
+  }
+}
+.xlarge-reduce {
+  line-height: 1.25;
+  @include breakpoint(xlarge) {
+    font-size: 0.875em;
+  }
+}
+.enlarge {
+  font-size: 1.125em;
+}
+.initial-color {
+  color: $body-font-color;
+}
+.weight-light {     
+  @if variable-exists(global-weight-light) {
+    font-weight: $global-weight-light; 
+  }
+}
+.lead,
+.weight-normal {
+  font-weight: $global-weight-normal;
+}
+.weight-medium {  
+  @if variable-exists(global-weight-medium) {
+    font-weight: $global-weight-medium; 
+    strong {
+      font-weight: $global-weight-bold;
+    }
+  }
+}
+.weight-bold {
+  font-weight: $global-weight-bold;
+  @if variable-exists(global-weight-black) {
+    strong {
+      font-weight: $global-weight-black;
+    }
+  }
+}
+.weight-black {
+  @if variable-exists(global-weight-black) {
+    font-weight: $global-weight-black;
+    strong {
+      font-weight: inherit;
+    }
+  }
+}
+.accent {
+  @if variable-exists(orbit-palette) {  
+    @each $name, $color in $orbit-palette {      
+      &-#{$name} {  
+        color: $color; 
+      } 
+    }
+  }
+}
+.accent-dark-gray {   // not part of the palette so adding it on
+  color: $dark-gray;
+}

@@ -1,0 +1,32 @@
+
+.box-right-40 {
+  @media screen and #{breakpoint(medium)} {
+    float: right;
+    width: 40%;
+    margin-left: $gutter;
+
+  }  
+}
+.box-left-40 {
+  @media screen and #{breakpoint(medium)} {
+    float: left;
+    width: 40%;
+    margin-right: $gutter;
+  }  
+}
+
+.box-right-fixed300 {
+  @media screen and #{breakpoint(medium)} {
+    float: right;
+    width: rem-calc(300);
+    margin-left: $global-margin;
+  }  
+}
+
+.box-left-fixed300 {
+  @media screen and #{breakpoint(medium)} {
+    float: left;
+    width: rem-calc(300);
+    margin-right: $global-margin;
+  }  
+}

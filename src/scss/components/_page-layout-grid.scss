@@ -1,0 +1,140 @@
+.grid-container.full-below-xlarge {
+ @include breakpoint(large down){
+   @include xy-grid-container(100%, 0);
+ }
+ > .grid-x {
+  @include breakpoint (large down) {
+    border-bottom: 1px solid darken($light-gray, 10%);
+  }
+ }
+}
+.layout-1, 
+.layout-2 {
+  position: relative;  // prevents stacking order issues in IE11
+  padding-top: rem-calc(32);   // this value is needed in the adjustSidebar script
+  padding-bottom: rem-calc(30); 
+  @include breakpoint(large) {
+    padding-bottom: rem-calc(64); 
+  }
+  @include breakpoint(xlarge) {
+    padding-top: rem-calc(58);   // this value is needed in the adjustSidebar script
+    padding-bottom: rem-calc(100); 
+  }
+} 
+
+.large-5 {   
+  section { 
+    padding: $gutter * 1.5;      
+    @include breakpoint(large) {
+      padding: $gutter;
+    }  
+    @include breakpoint(xlarge) {
+      padding: $global-padding * 1.9 $global-padding * 2;
+    }
+  }   
+  .tertiary-nav { 
+    @include breakpoint(large) {
+      margin-top: rem-calc(-133);
+    }
+    @include breakpoint(xlarge) {
+      margin-top: rem-calc(-133);
+    }
+  }
+}
+  
+// 2 col layout only
+.layout-2 > .grid-x,
+.layout-2 > .iw_row {
+  > .large-7 {      
+    .jut {
+      @include breakpoint(large) { 
+        width: 105%; 
+      }
+      @include breakpoint(xlarge) { 
+        width: 112%; 
+      } 
+    } 
+  }
+  > .large-5 {
+    &.iw_columns {
+      @include breakpoint(medium down) {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+    @include breakpoint(large) {
+      padding-left: 5%;
+    }
+    @include breakpoint(xlarge) {
+      padding-left: 9%;
+    }  
+    > * {  // force the sidebar items to full width at small and medium
+      @if if map-has-key($grid-container-padding, small) {
+        @include breakpoint(small only) {
+          $container-sides-small: - rem-calc(map-get($grid-container-padding, small)/2);
+          margin: 0 $container-sides-small !important; 
+        }        
+      } 
+      @if if map-has-key($grid-container-padding, medium) { 
+        @include breakpoint(medium only) {
+          $container-sides-medium: - rem-calc(map-get($grid-container-padding, medium)/2);
+          margin: 0 $container-sides-medium !important; 
+        }
+      }
+    }    
+  }
+}  
+.page-title,
+.footer-promo,
+.pre-footer-promo,
+.hero-blended,
+.row-wrapper {
+  > .row {
+    max-width: $grid-container;
+    @include breakpoint (large down) {
+      padding: 0 20px;
+    }
+    @include breakpoint (xlarge) {
+      padding: 0 40px;
+    }
+  }
+}
+.layout-2 .sidebar .row {
+  padding: 0 - $gutter/2;
+}
+
+@media screen {
+  .hero-blended {
+    > .grid-container {
+      @include vertical-center;
+      right: 0;
+      left: 0;
+      position: relative;
+    }
+  }
+}
+
+body.none {
+   min-width: rem-calc(150);
+   background: none;
+}
+body.none .half-col p { 
+  margin-bottom: 0.2rem; 
+}
+body.none .half-col label { 
+  font-weight: 400; font-size: 0.875rem; 
+}
+@media screen and (max-width: 28em) {
+  body.none hr { margin: 4px auto;}
+}
+@media screen and (min-width: 28em) { 
+  body.none .half-col { float: left; width: 50%; }
+  body.none .half-col p { margin-bottom: 0.9rem; }
+  body.none .half-col label { font-weight: 500; font-size: 1rem; }
+  body.none [type="email"] { width: 50%; }
+}
+@media print {
+  .large-5[style] {
+   margin-top: 0 !important;
+  }
+}

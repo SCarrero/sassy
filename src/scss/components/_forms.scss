@@ -1,0 +1,317 @@
+label {
+  padding-bottom: rem-calc(3px);
+  line-height: 1.3;
+}
+select {
+  height: 2.53125rem;
+  line-height: 1.1875;
+  box-shadow: $input-shadow;
+  position: relative;  
+  &:not([multiple]) { 
+    background-image: icon(chevron-down, $fm-gray, 24, 16, 0, 100, 800, 300);
+    background-position: $global-right center;
+    background-repeat: no-repeat;
+    background-origin: padding-box;
+    padding-right: 1.5rem;
+  }
+}
+
+input[type="email"] {
+  position: relative;          
+  background-image: icon(email, $fm-gray, 24, 24, 0, 3, 24, 24);
+  background-position: $global-right center;
+  background-repeat: no-repeat;
+  background-origin: content-box;
+}
+legend {
+  font-weight: $form-label-font-weight;
+} 
+fieldset {
+  margin-bottom: rem-calc(18); 
+  &.fieldset  {
+    border-radius: $input-radius;
+    legend {
+      background: inherit; // override foundation default
+    }
+  }
+}  
+.help-text  {
+  opacity: 0.8;
+  margin-top: ($form-spacing * 0.75) * -1;
+} 
+.form {
+  margin: $fieldset-margin;
+  .input-group {
+    > :first-child {
+      border-radius: $input-radius 0 0 $input-radius;
+    }
+    > :last-child {
+      border-radius: 0 $input-radius $input-radius 0;
+      > * {
+        border-radius: 0 $input-radius $input-radius 0;
+      }
+    }
+    .input-group-label {
+      padding: 0.53125rem 1rem;
+      height: rem-calc(41.2);
+      line-height: 1;
+      @include breakpoint(small only) {
+        padding: 0 0.875rem;
+        font-size: rem-calc(14);
+      }
+    }
+    .input-group-field {
+      height: rem-calc(41.2);
+      line-height: 1;
+      @include breakpoint(small only) {
+        font-size: rem-calc(14);
+      } 
+    }
+    .input-group-button {
+      .button {
+        padding: 0 1em;
+        @include breakpoint(small only) {
+          padding: 0 0.875rem;
+          font-size: rem-calc(14);
+        } 
+      }
+    }
+  } 
+}
+ // Styles for input/label siblings
+[type="radio"] ,  
+[type="checkbox"] {
+  @include element-invisible;
+  + label:not(.switch-paddle) {
+    margin-left: 0;
+    padding-top: rem-calc(3px);
+    line-height: 1.6;
+  }    
+  + label:not(.switch-paddle)::before {    
+    background: $white;
+    border: 2px solid $fm-gray;
+    content: '\2003';
+    display: inline-block;
+    font-weight: 700;
+    height: 1.25em;
+    width: 1.25em;
+    font-size: 1em;
+    line-height: 1;
+    margin: 0 0.5em 0 0;
+    text-align: center;
+  }
+  &:checked + label:not(.switch-paddle) {
+    color: $fm-green;
+    &::before {
+      color: $white;
+      border-color: $fm-green;
+    }
+  }
+  + label.multiline {
+    margin-left: 1.75em;
+    margin-right: 0;
+    @include clearfix;
+    &::before {
+      margin-left: -1.75em;
+      margin-top: 2px;
+      display: block; 
+      float: left;
+    }
+  }
+  &.pds-radiobutton {  //overrides for polldaddy's radio buttons
+    position: relative !important;
+    height: auto;
+    width: auto;
+  }
+
+  &[disabled] { 
+    + label::before {  
+        background: $fm-gray;
+    }
+  }
+}
+[type="radio"]:checked + label:not(.switch-paddle)::before {
+    background: $fm-green;
+    background: radial-gradient(ellipse at center, $fm-green 0%,$fm-green 60%,$white 60%);
+}
+[type="radio"] + label:not(.switch-paddle)::before {
+  border-radius: 50%;  
+} 
+[type="checkbox"]:checked + label:not(.switch-paddle)::before {
+    content: '\2713';  
+    background: $fm-green;
+}
+
+
+.outline { 
+  select:not(:active):not(:focus),
+  input:not(:active):not(:focus),
+  textarea:not(:active):not(:focus)  {
+   color: $white;
+  }
+  [type="text"], 
+  [type="password"], 
+  [type="date"], 
+  [type="datetime"], 
+  [type="datetime-local"], 
+  [type="month"], 
+  [type="week"], 
+  [type="email"], 
+  [type="number"], 
+  [type="search"], 
+  [type="tel"], 
+  [type="time"], 
+  [type="url"], 
+  [type="color"],
+  select,
+  textarea {
+    border: 1px solid $white;
+    background-color: transparent;
+    &:active,
+    &:focus {
+      background-color: $white;
+    }
+    &.is-invalid-input {
+      border-color: $input-background-invalid;
+      background-color: mix($input-background-invalid, $white, 10%);    
+      &::placeholder {
+        color: lighten($input-background-invalid, 20%);
+      }
+    }
+  }
+  input[type="email"]:not(:focus) {
+    background-image: icon(email, $white, 24, 24, 0, 3, 24, 24);
+  } 
+  input[type="search"]:not(:focus) {    
+    background-image: icon(search, $white, 24, 24);
+    background-position: $global-right center;
+    background-repeat: no-repeat;
+    background-origin: content-box;
+  }
+  select:not([multiple]):not(:focus) {
+    background-image: icon(chevron-down, $white, 24, 16, 0, 100, 800, 300);
+  }
+  .fieldset,
+  .input-group-label, 
+  [type="radio"] + label:not(.switch-paddle)::before,
+  [type="checkbox"] + label:not(.switch-paddle)::before {
+    border-color: $white;
+  }
+  [type="radio"]:checked + label,
+  [type="checkbox"]:checked + label {
+    color: $white;
+  }    
+  input::placeholder,
+  textarea::placeholder {
+    color: rgba($white, 0.8);
+  }
+}
+
+.form-error {    // override defaults
+  margin-bottom: 1em;
+  margin-top: 0;
+}
+
+label.is-invalid-label,
+.is-invalid-input + .help-text {
+  color: $form-label-color-invalid;
+}
+
+.filter-field {
+  &::-ms-clear {
+     display: none;  // hide the X inserted by IE
+  }
+  + .reset-filter {
+    display: block;
+    position: absolute;
+    background: transparent;
+    border-radius: 0;
+    width:2em;
+    height: 2em;
+    top: 0.25em;
+    right: 0.75em;    
+    outline: 0;
+    &:-moz-focusring {
+      outline: 0 dotted ButtonText;
+    }    
+    &::after {
+      content: '';
+      position: absolute;
+      display: block;
+      top: 0.5em;
+      right: 0.5em;
+      background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, lighten($fm-gray, 10%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;
+      height: 1em; 
+      width: 1em;
+      transition: background 0.25s ease-out;
+    }
+    &:hover,
+    &:focus {
+      &::after {      
+        background: transparent icon(reset-field, none, 32px, 32px, 0, 0, 24, 24, darken($fm-gray, 5%), 2, "stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:10;") no-repeat center center;  
+      }
+    } 
+  }
+}
+
+.module-form {
+  border: 2px solid darken($light-gray, 3.7%);
+  border-radius: 6px 6px 0 0;
+  position: relative;
+  margin-bottom: $gutter;
+  padding-top: rem-calc(9 0 0);
+  @include breakpoint(xlarge) {
+    padding: rem-calc(17 0 0 10);
+  }
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    background-color: $light-gray;
+    height: rem-calc(9);
+    border-radius: 5px 5px 0 0;
+  }
+  .module-control {
+    display: inline-block;
+    .button-expand,
+    .button-collapse  {
+      position: relative;
+      display: inline-block;
+      line-height: 1;
+      padding: rem-calc(10);
+      @include breakpoint(medium) {
+        padding: rem-calc(10 20);
+      }
+      color: $fm-green;
+      background: $light-gray;
+      text-transform: uppercase;
+      font-weight: $global-weight-medium;
+      font-family: inherit;
+      &::after {
+        content: ' ';  
+        background: transparent icon(chevron-dbl-down, $fm-green, 13px, 13px, 0, 0, 14, 14) no-repeat center center / cover;    
+        width: 0.85em;
+        height: 0.85em;
+        display: inline-block;
+        position: relative;
+        margin-left: 0.5em;
+      }
+      &:hover,
+      &:focus {
+        background: scale-color($light-gray, $lightness: -5%);        
+      }
+    }
+    .button-collapse::after {
+      transform: rotate(180deg);
+    }
+  }
+}
+[type="email"]::-ms-clear {
+  display: none;
+}
+textarea {
+  line-height: 1.15;
+}

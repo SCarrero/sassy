@@ -1,0 +1,35 @@
+$avatar-width: 80px;
+
+.avatar {
+	margin: 2rem 0 0;
+	> div {
+		display: table-cell;
+		vertical-align: middle;
+    &:first-child {
+      width: rem-calc($avatar-width + $gutter);
+      padding-right: $gutter;
+      .card & {
+        // right when we first hit the medium breakpoint, some EP titles are so long they run off -- so for a tiny bit, we reduce the avatar and padding
+        @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium))) and (max-width: -zf-bp-to-em(map-get($breakpoints, medium) + 60px)) {
+          width: rem-calc($avatar-width * 0.85 + $gutter * 0.85); 
+          padding-right: $gutter * 0.85; 
+          img {
+            width: rem-calc($avatar-width * 0.85);
+          }
+        }
+      }
+    }
+	}
+	img {
+		border-radius: 50%; 
+    width: rem-calc($avatar-width);
+    border-width: 0px;
+	}
+	figcaption {
+    max-height: 6em;
+    margin: 0;
+	}
+}
+.double-avatar .avatar figcaption {     
+    max-height: 150px;
+}

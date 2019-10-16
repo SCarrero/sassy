@@ -1,0 +1,298 @@
+h2, h3, h4 {
+ > a { display: inline-block; }
+}
+.background-sheer {
+  transition: opacity 0.25s ease-in;
+}
+.background-sheer:hover,
+.background-sheer:focus {
+  opacity: .95;  
+  transition: opacity 0.25s ease-out;
+}
+  
+@each $name, $color in $orbit-palette {    
+  .background-#{$name} a {  
+    $current-contrast: color-contrast($color, $white);
+    @if ($current-contrast > 1.6) {
+      @include anchor-on-dark(none);     
+    }
+  } 
+  a:not(.background-sheer):hover .background-#{$name},
+  a:not(.background-sheer):focus .background-#{$name} {
+    opacity: 0.85;
+    transition: opacity 0.25s ease-out;
+  }
+} 
+
+.no-tap-hightlight {
+  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);  // hides the color overlay on mobile tap -- handy for when Jon complains about it conflicting with other items.
+}
+a:hover .background-concrete,
+a:focus .background-concrete {
+  opacity: 0.8;
+  transition: opacity 0.25s ease-out;
+}
+thead a {
+  @include anchor-on-dark(none);
+}
+
+.card:not(:hover):not(.primary),
+.sidebar.background-concrete {
+  a:not(:hover):not(:focus):not(.button):not(.icon-chevron-right) {
+    color: inherit;
+  }
+}
+.card:hover a:not(.button) {
+  color: $anchor-color-hover;  
+  transition: color 0.25s ease-out;
+}
+.background-white {
+  a:not(.button) {
+    color: $anchor-color;
+    &:hover,
+    &:focus {
+      color: $anchor-color-hover;
+      transition: color 0.25s ease-out;
+    }
+  }
+}
+
+a {
+  .background-white {
+    color: inherit;
+  }
+}
+.video-modal {
+  position: relative;
+  display: inline-block;  
+}
+.video-length {
+  position: absolute; 
+  display: inline-block;
+  min-width: rem-calc(90);
+  color: $white;
+  padding: 0.7em 0.4em 0.6em 2em;
+  z-index:301; 
+  left: 1px;
+  bottom: 1px; 
+  background: rgba($primary-color, 0.92);
+  &::before {
+    content: "";
+    position: absolute;
+    display: block;
+    background: transparent icon(play, 'none', 28px, 28px, 0, 0, 200, 200, $white, '14') no-repeat top left / contain;
+    width: 1.35em;
+    height: 1.35em;
+    left: rem-calc(9);
+    bottom: rem-calc(9); 
+  }
+  .overlay & {  
+    transition: background 0.25s ease; 
+  }  
+  .twin-col & {
+    right: 0px;
+    bottom: 0px;
+    left: auto;
+    background: rgba($white, 0.3);
+  }
+}
+
+.marker-buttonize {
+  display: block;
+  margin: 0.3125em 0.625em 0.3125em 0;    
+  padding-left: 0.625em;
+  background: $white;
+  color: $fm-gray;
+  &:hover,
+  &:focus,
+  &:active {
+    color: $fm-gray;
+    background-color: rgba($white, 0.8); 
+    transition: background-color 0.25s ease-out;
+  }  
+  .icon-deal-marker {
+    margin-bottom: 0;
+  }
+}
+// link that has no text in it -- just an svg
+.svglink-round-blue {
+  display: block;
+  background: $anchor-color;
+  margin: 0 auto;
+  border-radius: 50%;
+  position: relative;
+  font-size: 2.5rem;
+  width: 1.8em;
+  height: 1.8em;
+  margin-bottom: 0.375em;
+  @include breakpoint(large) {
+    font-size: 3rem;
+  }
+  @include breakpoint(xlarge) {
+    font-size: 3.5rem;
+  }  
+  &:hover,
+  &:focus {
+    background: $anchor-color-hover;
+  }
+  svg {
+    @include absolute-center; 
+    height: 1em;
+    width: 1em;
+  }
+}
+
+@media screen {
+  .modal-launch,
+  .overlay  {
+    display: inline-block; 
+    background: $primary-color;  
+    color: $white;
+    &.mask::after {
+      position: absolute;
+      bottom: 0;
+      right: 0;
+      top: 0;
+      left: 0;
+      content: "";
+      background-color: rgba($black, 0.04);      
+    }
+    img {
+      opacity: 1;
+      transition: opacity 0.2s ease;
+      width: 100%;
+    }
+    &.mask-gray {
+      background: $fm-gray; 
+      display: block; 
+      overflow: hidden;      
+      img { 
+        opacity: 0.35;
+      }
+    }
+    &:hover,
+    &:focus,
+    .card:hover &  {
+      color: $white;
+      background: $primary-color;
+      img {
+        opacity: 0.22; 
+      }
+      &.mask::after {
+        background-color: transparent;
+      }
+    } 
+  }
+
+  .modal-launch {
+    position: relative;  
+    &::after {
+      position: absolute;
+      bottom: 1rem;
+      right: 1rem;
+      width: 1.5rem;
+      height: 1.5rem;
+      content: " ";
+      z-index: 300;
+      background: transparent url("/images/icon_expand.png") no-repeat top left;
+    }
+  }  
+}
+.overlay-contents {
+  color: $white;
+  padding: $gutter;
+  @include breakpoint(small only) {
+    background: $fm-gray;
+  } 
+  @media screen and #{breakpoint(medium)} { 
+    position: absolute;
+    bottom: 0;
+    left:0;
+    right:0;
+    z-index: 120;
+  }
+  @include breakpoint(large) {   
+    padding: $gutter $gutter * 1.5; 
+  }  
+  @include breakpoint(xxlarge) {   
+    padding: $gutter * 1.5 $gutter * 1.5 $gutter * 1.5 $gutter * 2; 
+  }  
+}
+.overlay  {  
+	position: relative;  
+  &.overlay-dark {
+    @media screen and #{breakpoint(medium)} {
+      img {
+        z-index: 100;
+      }
+      &::after {
+        content: " ";
+        display: block;      
+        position: absolute;
+        bottom: 0;
+        left:0;
+        right:0; 
+        top: 0;
+        z-index: 105;
+        background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.75) 100%);
+        transition: background-image 0.3s ease 0s;       
+      }
+      &:hover,
+      &:focus  {
+        &::after {
+          background: linear-gradient(to bottom, rgba(0,0,0,0) 0%, rgba(0,0,0,0) 50%, rgba(0,0,0,0.3) 100%);
+        }
+      }
+    }
+  }
+  
+  &.overlay-gradient {
+    .overlay-contents { 
+      @media screen and #{breakpoint(medium)} {    
+        top: 0;
+        padding-right: 33%; 
+      }  
+      @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium) + 60px)) {
+        padding-right: 40%; 
+      }
+      @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium) + 300px)) {
+        padding-right: 45%; 
+      }
+      @include breakpoint(large) {   
+        padding-right: 38%;
+      } 
+      @include breakpoint(xlarge only) {   
+        padding-right: 33%;
+      }  
+    }
+    @media screen and #{breakpoint(medium)} {    
+      &::after {
+        content: " ";
+        display: block;      
+        position: absolute;
+        bottom: 0;
+        left:0;
+        right:0; 
+        top: 0;
+        background: linear-gradient(to right, rgba($fm-gray,1) 0%,rgba($fm-gray,0.7) 50%,rgba($fm-gray,0.3) 100%);
+        transition: background-image 0.3s ease 0s;       
+      }
+      &:hover,
+      &:focus {
+        &::after {
+          background: linear-gradient(to right, rgba(mix($fm-gray, $primary-color, 40%),0.8) 0%,rgba(mix($fm-gray, $primary-color, 30%),0.4) 50%,rgba(mix($fm-gray, $primary-color, 20%),0.1) 100%); 
+        }
+      }
+    } 
+  }
+}
+@media print { 
+  .overlay-gradient > img { padding-right: 50%; }
+  .video-length { display: none; }  
+    @if $print-hrefs {
+      a[href] { -moz-text-decoration-color: #ccc; text-decoration-color: #ccc; }
+      .feature-block a[href] { text-decoration: none; }
+      a[href]:after { font-size: 11pt; font-weight: 400; text-transform: none;}
+      a[href^='/']:after { content: ' (http://www.freddiemac.com' attr(href) ')'; }
+    }
+}

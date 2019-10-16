@@ -1,0 +1,134 @@
+// fix for table hover striping affecting header rows
+table.hover:not(.unstriped) {
+  thead {
+    tr:nth-of-type(n):hover    {
+      background-color: $table-head-row-hover;
+    }
+  }
+}
+table {
+  border-collapse:separate;  
+  border-spacing: 0; 
+  color: $table-foot-font-color; 
+  border-bottom: 2px solid scale-color($fm-blue, $lightness: 60%);
+  td, th {  border: 1px solid $white; }
+}
+
+
+tbody th:not([class]) {
+  text-align: left;
+}
+
+thead[class] th:not([class]) {
+  text-align: inherit;
+}
+
+table tfoot td {
+  font-weight: inherit;
+}
+table.stack {
+  &.show-header{
+    @include breakpoint(medium down) {
+      thead {
+        display: block;
+        th:not(:first-child ) {
+          display: none;
+        }
+      }  
+    }
+  }
+  tfoot,
+  tbody  {
+    @include breakpoint(medium down) {
+      display: block;
+    }
+  }
+}
+table.large-stack {
+  @include breakpoint(large down) {
+    @include table-stack;
+    .show-header {
+      thead {
+        display: block;
+        th {
+          display: none;
+        }
+        th:first-child {
+          display: block;
+        }
+      }  
+    }
+    tfoot,
+    tbody {
+      display: block;
+    }    
+  }
+}
+.table-scroll {  
+  .full.stack {
+    @include breakpoint(medium down){
+      width: 100%;
+    } 
+  }
+  .full.large-stack {
+    @include breakpoint(large down){
+      width: 100%;
+    } 
+  }
+}
+.stack .row-divided {
+  tr::before {
+    @include breakpoint(medium down){
+      content: "";
+      display: block;
+      width: 100%;
+      border-bottom: 2px solid scale-color($fm-blue, $lightness: 60%);
+    }    
+  }  
+}
+.large-stack .row-divided {
+  tr::before {
+    @include breakpoint(large down){
+      content: "";
+      display: block;
+      border-bottom: 2px solid scale-color($fm-blue, $lightness: 60%);
+    }
+  }
+}
+.research-table {
+  color: $fm-gray;
+  border-collapse:collapse;  
+  border-bottom-width: 0;
+  th, 
+  td {
+    padding: 0.5rem 0.4rem;
+  }
+  thead {
+    background: $primary-color;
+    
+  }
+  strong {
+    font-weight: $global-weight-black;
+  }
+  tbody {
+    tr:nth-child(n) {  
+      background: #fff;
+      td {
+        border: 1px solid darken($light-gray, 5.5);
+      }
+    }
+  }
+}
+tr.row-subheader {
+  + tr::before  { 
+    border-bottom-width: 0 !important; 
+  }
+  th {
+    background: scale-color($fm-blue, $lightness: 70%);
+  }
+}
+.vertical-middle { vertical-align: middle; } 
+.vertical-top { vertical-align: top; } 
+.vertical-baseline {   vertical-align: baseline; } 
+.vertical-bottom {   vertical-align: bottom; }
+.overflow-horizontal { overflow-x: auto; }

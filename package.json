@@ -1,0 +1,43 @@
+{
+  "name": "sassy",
+  "version": "1.0.0",
+  "description": "ZURB Template Variant Used by FM",
+  "main": "gulpfile.babel.js",
+  "scripts": {
+    "start": "gulp"
+  },
+  "author": "ZURB <foundation@zurb.com>",
+  "license": "MIT",
+  "dependencies": {
+    "foundation-sites": "^6.5.1",
+    "jquery": "^3.4.1",
+    "motion-ui": "^2.0.3",
+    "what-input": "^5.2.3"
+  },
+  "devDependencies": {
+    "@babel/core": "7.4.5",
+    "@babel/preset-env": "7.4.5",
+    "@babel/register": "^7.4.4",
+    "autoprefixer": "^9.6.0",
+    "browser-sync": "^2.26.5",
+    "gulp": "^4.0.0",
+    "gulp-babel": "^8.0.0",
+    "gulp-clean-css": "^4.2.0",
+    "gulp-cli": "^2.0.1",
+    "gulp-concat": "^2.6.1",
+    "gulp-extname": "^0.2.2",
+    "gulp-if": "^2.0.2",
+    "gulp-load-plugins": "^1.6.0",
+    "gulp-postcss": "^8.0.0",
+    "gulp-sass": "^4.0.2",
+    "gulp-uglify": "^3.0.2"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SCarrero/sassy.git"
+  },
+  "bugs": {
+    "url": "https://github.com/SCarrero/sassy/issues"
+  },
+  "private": true
+}

@@ -1,0 +1,68 @@
+.talk-bubble {
+  position: relative;
+  padding: $gutter;
+  margin: rem-calc(5 5 20 0);
+  color: $dark-gray;
+  border: 1px solid rgba(0,0,0, 0.12);
+  background: $white;
+  border-radius: $gutter;
+  box-shadow: 3px 5px 12px 0px rgba(0,0,0,0.06);
+  &::after,
+  &::before {
+    content: "";
+    position: absolute;
+    border-width: rem-calc(15 9 0);
+    border-style: solid;
+    display: block;
+    width: 0;  
+    left: rem-calc(26);
+  }
+  &::before {
+    bottom: rem-calc(-15);
+    border-color: rgba(0,0,0,0.12) transparent transparent;
+  }
+  &::after {
+    bottom: rem-calc(-13);
+    border-color: $white transparent transparent;
+  }  
+  &.right::after,
+  &.right::before{
+    right: rem-calc(26);
+    left: auto;
+  }
+  > p:last-child {
+    margin-bottom: 0;
+  }
+  &.large {
+    @include breakpoint(medium) {  
+      padding: $gutter * 1.5;
+      margin-bottom: rem-calc(24);
+    }
+    &::after,
+    &::before {
+      left: rem-calc(72);
+      @include breakpoint(medium) { 
+        border-width: rem-calc(24 19 0 2);
+      }
+    }     
+    &.right::after,
+    &.right::before{
+      right: rem-calc(72);
+      left: auto;
+      @include breakpoint(medium) { 
+        border-width: rem-calc(24 2 0 19);
+      }
+    }
+    &::before {
+      @include breakpoint(medium) { 
+        bottom: rem-calc(-24);
+      }    
+    }
+    &::after {
+      @include breakpoint(medium) { 
+        bottom: rem-calc(-22);
+      }    
+    }
+  }
+}
+

@@ -1,0 +1,41 @@
+$testimonial-bg: $light-gray;
+
+.testimonial-block-vertical {
+  margin: $gutter * 1.5 0 $gutter;
+  .avatar {
+    margin-top: 0;
+    display: inline-block;
+  }  
+  &.author-right {
+    .avatar { display: table;  margin-left: auto; }
+    .testimonial-block-vertical-quote::before {
+      left: auto;
+      right: $gutter;
+    }
+  }
+  + .testimonial-block-vertical {
+    margin: $gutter 0;
+  }
+}
+
+.testimonial-block-vertical-quote {
+  background: $testimonial-bg;
+  padding: $gutter;
+  border-radius: 0.5rem;
+  margin-top: 0.85rem;
+  position: relative; 
+  :last-child {
+    margin-bottom: 0;
+  }
+  &::before {
+    content: '';
+    top: -1.125rem;
+    left: $gutter;
+    width: 0px;
+    height: 0px;
+    border-style: solid;
+    border-color: transparent transparent $testimonial-bg transparent;
+    position: absolute;
+    border-width: 0 $gutter 1.125rem $gutter;
+  }
+}

@@ -1,0 +1,26 @@
+
+img {
+  &:not([src$=svg]):not(.no-border):not(.orbit-image) {
+    border: 1px solid darken($light-gray, 5%);
+  }
+}
+.full {
+  width: 100%;
+}
+.width-auto {
+  width: auto !important;
+}
+
+.image-shadow {
+  box-shadow: 5px 5px 25px 0px rgba(0,0,0,0.2);
+}
+img.avatar {
+  border-radius: 50%; 
+  width: rem-calc(70);
+  margin: 0;
+}
+body > img {   // preventing pixel image inserted by GTM from adding a gap below the page
+  position: absolute;
+  bottom: 0;
+  z-index:0;
+}

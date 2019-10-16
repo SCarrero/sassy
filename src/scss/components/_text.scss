@@ -1,0 +1,702 @@
+// headers inherit weight from $header-font-weight
+// and line-height from  $header-lineheight
+// and bottom margin from $header-margin-bottom
+h1 {
+  font-size: calc(30px +  12 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(42); 
+  }
+}
+h2 {
+  font-size: calc(22px +  10 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(32); 
+  }    
+}
+h3 {
+  font-size: calc(20px +  8 * (100vw - 320px) / 1180);
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(28); 
+  }    
+}
+h4 {
+  font-size: calc(18px +  7 * (100vw - 320px) / 1180);
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(25); 
+  }    
+}
+h5 {
+  font-size: calc(16px +  5 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(21); 
+  }    
+}
+h6 {
+  font-size: calc(15px +  3 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(18); 
+  }    
+}
+
+sup {
+  font-size: 62%;
+  top: -0.55em;  
+}
+.intro {
+  font-size: rem-calc(17);    
+  font-size: calc(17px +  5 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(22);
+  }
+}
+.filemarker {
+  font-variant: small-caps;
+  opacity: 0.8;
+}
+body {  
+	font-weight: $global-weight-light;
+}
+strong {
+  font-weight: $global-weight-medium;
+}
+b {
+  font-weight: $global-weight-bold;
+}
+blockquote {
+  font-size: rem-calc(17); 
+  font-weight: $global-weight-normal;
+  font-size: calc(17px +  3 * (100vw - 320px)/1180);
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(20);
+  }
+  footer { 
+    font-weight: $global-weight-light;
+    font-style: italic;
+    font-size: 90%;
+    padding: 0;
+    @include breakpoint(large) {
+      font-size: 80%;
+    }
+    &::before {
+    content: "\2014 \0020";
+    }    
+  }    
+}
+figcaption {
+  &.reduce {
+    font-size: rem-calc(12);
+    @include breakpoint(medium) {
+      font-size: rem-calc(14);
+    }
+  }
+  > * { 
+    font-size: inherit;
+  }
+  blockquote {
+    padding: rem-calc(1 15 1 10);
+  }
+  :last-child { margin-bottom: 0;}
+}
+
+sup {
+  font-size: 62%;
+  top: -0.55em;  
+}
+.call-to-action {
+  font-size: rem-calc(28);
+  color: inherit;
+	font-size: calc(28px +  20 * (100vw - 320px)/1180);
+	@include breakpoint(xxlarge) {
+		font-size: rem-calc(48);
+	}
+  a {
+    color: inherit;
+  }
+}
+.grid-block-label {
+  font-size: rem-calc(13);
+  font-size: calc(13px +  3 * (100vw - 320px)/1180); 
+  color: $white;
+  line-height: 1.1;
+  margin: 0 0 1.5em;
+  font-weight: $global-weight-bold;
+  text-transform: uppercase;
+  @include breakpoint(small only) {
+    font-weight: $global-weight-medium;
+  }
+  @include breakpoint(large) {
+		font-size: rem-calc(16);
+	}
+}
+.grid-block-title-large {
+  font-size: rem-calc(20);
+  line-height: 1.25;
+  font-size: calc(20px +  18 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-medium;
+  margin: 0 0 0.7em; 
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(38);
+	}
+}
+.grid-block-title {
+  font-size: rem-calc(16);
+  line-height: 1.18;
+  font-size: calc(16px +  16 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-bold;
+  @include breakpoint(small only) {
+    font-weight: $global-weight-medium;
+  }
+  margin: 0 0 0.5rem;  
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(32);
+	}
+  .media-object-section & {
+    margin: 0.75rem 0 0; 
+  }
+}
+.grid-block-title-condensed {
+  font-size: rem-calc(26);
+  font-size: calc(26px +  14 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-bold;
+  padding: 0.7em 0 0.4em;
+  margin: 0;  
+  line-height: 1;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(40);
+	}
+}
+.grid-block-title-medium {
+  font-size: rem-calc(16);
+  font-size: calc(16px +  8 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-bold;
+  @include breakpoint(small only) {
+    font-weight: $global-weight-medium;
+  }
+  margin: 0 0 0.5rem;  
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(24);
+	}
+  svg { 
+    vertical-align: baseline;
+  }
+}
+.grid-block-text-large {  
+  font-size: rem-calc(18);
+  font-size: calc(18px +  12 * (100vw - 320px)/1180); 
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(30);
+	}
+}
+.grid-block-text-medium {  
+  font-size: rem-calc(17);
+  line-height: 1.28;
+  font-size: calc(17px +  9 * (100vw - 320px)/1180); 
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(26);
+	}
+}
+.grid-block-text {  
+  font-size: rem-calc(15);
+  font-size: calc(15px +  6 * (100vw - 320px)/1180); 
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(21);
+	}
+}
+.grid-block-text-small {  
+  font-size: rem-calc(14);
+  line-height: 1.2;
+  @include breakpoint(medium) {
+		font-size: rem-calc(16);
+	}
+}
+.callout-footer-title {
+  font-size: rem-calc(28);
+  font-size: calc(28px +  24 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-medium;
+	@include breakpoint(xxlarge) {
+    font-size: rem-calc(52);
+  }
+	strong {
+		font-weight: $global-weight-bold;
+	}
+}
+.hero-title {
+  font-size: rem-calc(24);
+  font-size: calc(24px +  28 * (100vw - 320px)/1180); 
+  line-height: 1.23;
+  margin-bottom: 0.5em;    
+  @media (min-width: -zf-bp-to-em(map-get($breakpoints, medium) - 120px)) {
+    margin: 1.5rem 0;
+  }
+  font-weight: $global-weight-black;
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(52);
+    margin-bottom: 2rem;
+  }
+}
+.subtitle {
+  font-size: rem-calc(18);
+  font-size: calc(18px +  14 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-bold;
+  margin: 0.25em 0 0.375em;  
+  .iw_columns.large-7 & {
+    @include breakpoint(xlarge only) {
+      font-size: rem-calc(26);
+      font-size: calc(26px +  6 * (100vw - 1180px)/220); 
+    }
+  }
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(32);
+	}
+}
+.feature-subtitle {
+  font-size: rem-calc(18);
+  font-weight: $global-weight-bold;
+  margin: 0.25em 0 0.375em;     
+  @include breakpoint(medium) {		
+  font-size: calc(20px +  10 * (100vw - 320px)/1180); 
+	}
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(30);
+	}
+}
+.sidebar-title {
+  font-size: rem-calc(18);
+  font-size: calc(18px +  12 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-bold;
+  margin: 0 0 0.5em;
+  line-height: 1.2;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(30);
+	}
+}
+
+.banner-title {
+  font-size: rem-calc(20);
+  font-size: calc(20px +  16 * (100vw - 320px)/1180); 
+  line-height: 1.3;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(36);
+	}
+  .iw_columns.large-7 & {
+    @include breakpoint(medium only) {
+      font-size: rem-calc(30);
+    }
+  }
+}
+.sidebar-subtitle {
+  font-size: rem-calc(17);
+  font-size: calc(17px +  7 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-bold;
+  margin: 0 0 0.375em;
+  line-height: 1.2;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(24);
+	}
+}
+.sidebar-headline {
+  font-size: rem-calc(16);
+  font-weight: $global-weight-medium;
+  @include breakpoint(medium) {
+		font-size: rem-calc(18);
+	}
+  .iw_columns.large-7 & {
+    @include breakpoint(large only) {
+      font-size: rem-calc(16);
+    }
+	}
+}
+
+.stat-points {
+  font-size: rem-calc(14);
+  font-size: calc(14px +  2 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-normal;
+  margin-bottom: 0;
+  @include breakpoint(large) {
+		margin-bottom: 0.5em;
+    font-weight: $global-weight-bold;
+	}
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(16);
+	}
+}
+.homepage-headline {
+  font-size: rem-calc(22);
+  font-size: calc(22px +  10 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-bold;
+  margin: 0 0 0.375em;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(32);
+	}
+}
+.section-subtitle {
+  font-size: rem-calc(18);
+  font-size: calc(18px +  4 * (100vw - 320px)/1180);
+  color: inherit;
+  font-weight: inherit;
+  margin-bottom: 0.25rem;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(22);
+	}
+  + .section-subtitle {
+    margin-top: 0.5em;
+  }
+}
+.article-headline {
+  font-size: rem-calc(16);
+  font-size: calc(16px +  6 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-medium;
+  margin: 0.15em 0 0.45em; 
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(22);
+	}
+	strong {
+		font-weight: $global-weight-bold;
+	}
+  .article-date-lg + & {
+    margin-top: 0;
+  }
+}
+
+.article-category {
+  font-size: rem-calc(13);
+  font-weight: $global-weight-medium;
+  color: inherit;
+  opacity: 0.75;
+  text-transform: uppercase;
+  margin: 0.25em 0;
+  line-height: 1.2;
+	@include breakpoint(medium) {
+		font-size: rem-calc(14);
+    font-weight: $global-weight-bold;
+	}
+  .sidebar:not(.events) & {
+    margin-bottom: 0.65em;
+  }
+}
+.article-date {
+  font-size: rem-calc(13);
+  color: inherit;
+  opacity: 0.75;
+  font-weight: inherit;
+  line-height: 1.1;
+  margin-bottom: 0.6em;
+  text-transform: uppercase;
+	@include breakpoint(medium) {
+		font-size: rem-calc(14);
+	}
+}
+
+.article-date-lg {
+  font-size: rem-calc(14);
+  opacity: 0.75;
+  font-weight: inherit;
+  line-height: 1.1;
+  margin-bottom: 0.75em;
+	@include breakpoint(medium) {
+		font-size: rem-calc(16);
+	}
+	strong {
+		font-weight: $global-weight-bold;
+	}
+}
+
+.article-byline {
+  font-size: rem-calc(15);
+  color: inherit;
+  line-height: 1.2;
+  font-weight: inherit;
+  margin-top: 0.6em;
+	@include breakpoint(xxlarge) {
+		font-size: rem-calc(16);
+	}
+	strong {
+		font-weight: $global-weight-bold;
+	}
+}
+
+.article-byline-small {
+  font-size: rem-calc(13);
+  color: lighten(saturate(adjust-hue($body-font-color,15), 1), 19);  // same as $fm-gray, but friendly to non-corp styles;
+  line-height: 1.25;
+	@include breakpoint(medium) {
+		font-size: rem-calc(14);
+	}
+}
+.flex-up {  
+  font-size: rem-calc(16);
+  font-size: calc(16px +  2 * (100vw - 320px)/1180);
+  font-weight: $global-weight-normal;
+	@include breakpoint(xxlarge) {
+		font-size: rem-calc(18);
+	}
+  strong { 
+    font-weight: $global-weight-bold; 
+  }
+}
+.flex-down {  
+  font-size: rem-calc(14);
+  font-size: calc(14px +  2 * (100vw - 320px)/1180);
+	@include breakpoint(xxlarge) {
+		font-size: rem-calc(16);
+	}
+}
+.article-blurb {
+  @include show-for(medium);
+  font-size: rem-calc(13);
+  font-size: calc(13px +  3 * (100vw - 320px)/1180);
+  font-weight: inherit;
+	@include breakpoint(xxlarge) {
+		font-size: rem-calc(16);
+	}
+}
+.article-blurb-blog {
+  @include show-for(medium);
+  font-size: rem-calc(13);
+  font-weight: $global-weight-light;
+	@include breakpoint(large) {
+		font-size: rem-calc(14);
+	}
+}
+.article-blurb-lg {
+  @include show-for(medium);
+  font-size: rem-calc(14);
+  font-size: calc(14px +  2 * (100vw - 320px)/1180);
+  font-weight: inherit;
+  line-height: 1.3; 
+  margin: 0.8em 0;  
+  @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium))) and (max-width: -zf-bp-to-em(map-get($breakpoints, medium) + 80px)) {
+    overflow: hidden;
+    max-height: 3.9em; /* (Number of lines you want visible) * (line-height) */ 
+  }
+  @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium) + 120px)) {
+    font-size: rem-calc(17);
+    line-height: 1.4;
+  }
+  .iw_columns.large-7 & {
+    @include breakpoint(large only) {
+      font-size: rem-calc(16);
+      font-size: calc(16px +  4 * (100vw - 320px)/1180);
+    }
+    @include breakpoint(xlarge only) {
+      font-size: rem-calc(14);
+      font-size: calc(14px +  4 * (100vw - 320px)/1180);
+      line-height: 1.3; 
+    }
+  }
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(18);
+  }
+}
+
+.article-date-feature {
+  font-size: rem-calc(14);
+  font-size: calc(14px +  4 * (100vw - 320px)/1180);
+  font-weight: $global-weight-medium;
+  color: inherit;
+  text-transform: uppercase;
+  opacity: 0.75;
+	@include breakpoint(xxlarge) {
+		font-size: rem-calc(18);
+	}
+}
+.hero-subtitle {
+  font-size: rem-calc(20); 
+  font-size: calc(20px +  8 * (100vw - 320px)/1180);
+  font-weight: inherit;
+  margin-bottom: $global-margin * 2;
+  line-height: 1.2;
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(28);
+  }
+}
+.hero-date {
+  font-size: rem-calc(16);
+  font-size: calc(16px +  6 * (100vw - 320px)/1180); 
+  font-weight: inherit;
+  text-transform: uppercase;
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(22);
+  }
+}
+.callout-txt {
+	color: $primary-color;
+	font-size: rem-calc(30);
+  font-size: calc(30px +  18 * (100vw - 320px)/1180);
+	line-height: 1.2;
+	margin: 2rem 0;
+  font-weight: inherit;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(48);
+	}
+}
+.finance-category {
+  font-size: rem-calc(18);
+  font-size: calc(18px +  4 * (100vw - 320px)/1180);
+  font-weight: $global-weight-medium;
+  line-height: 1.1;
+  text-transform: uppercase;
+  margin-bottom: $global-margin;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(22);
+    letter-spacing: 1px;
+	}
+}
+.finance-research-title {
+  font-size: rem-calc(30);
+  font-size: calc(30px +  18 * (100vw - 320px)/1180);
+  font-weight: $global-weight-bold;
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(48);
+  letter-spacing: 1px;
+  }  
+}
+.finance-research-category {
+  font-size: rem-calc(15);
+  font-size: calc(15px +  2 * (100vw - 320px)/1180);
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(18);
+    letter-spacing: 1px;
+  }  
+}
+.stat-sm {
+  font-size: rem-calc(18);
+  font-size: calc(18px +  14 * (100vw - 320px)/1180);
+  line-height: 1.1;
+  width: 100%;
+  font-weight: 900;
+  
+  @include breakpoint (xxlarge) {
+    font-size: rem-calc(32);
+  }
+}
+.stat-med {
+  font-size: rem-calc(24);
+  font-size: calc(24px +  18 * (100vw - 320px)/1180);
+  font-weight: $global-weight-black;
+  line-height: 1.1;
+  padding-bottom: 0.1em;
+  @include breakpoint (xxlarge) {
+    font-size: rem-calc(42);
+  }
+}
+.stat {
+  font-size: rem-calc(20);
+  font-size: calc(20px +  28 * (100vw - 320px)/1180); 
+  @include breakpoint (xxlarge) {
+    font-size: rem-calc(48);
+  }
+}
+.stat-lg {
+	font-size: rem-calc(24);
+  font-size: calc(24px +  (52 - 24) * (100vw - 320px)/1180); 
+  line-height: 1.1;
+  @include breakpoint(xxlarge) { 
+    font-size: rem-calc(52);
+  }
+}
+.stat-xl {
+	font-size: rem-calc(26);
+  font-size: calc(26px +  37 * (100vw - 320px)/1180);
+  line-height: 1.1;
+  @include breakpoint(xxlarge) { 
+    font-size: rem-calc(63);
+  }
+}
+.page-subtitle {
+  margin: 0.5em 0;
+  font-weight: $global-weight-medium;
+  color: lighten(saturate(adjust-hue($body-font-color,15), 1), 19);  // same as $fm-gray, but friendly to non-corp styles;
+  font-size: rem-calc(17);    
+  font-size: calc(17px +  5 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(22);
+  }
+	strong {
+		font-weight: $global-weight-bold;
+	}
+}
+.cross-promo-title {
+  font-weight: $global-weight-bold;
+  color: lighten(saturate(adjust-hue($body-font-color,15), 1), 19);  // same as $fm-gray, but friendly to non-corp styles;
+  margin: $gutter 0;
+  font-size: rem-calc(20); 
+  text-transform: uppercase;  
+  font-size: calc(20px +  8 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(28);
+    margin: $global-margin * 2 0;
+  }
+
+}
+.card-title-large {
+  font-size: rem-calc(18);
+  font-size: calc(18px +  6 * (100vw - 320px)/1180); 
+  font-weight: $global-weight-medium;
+  margin: 0.2em 0 0.45em;  
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(24);
+	}
+	strong {
+		font-weight: $global-weight-bold;
+	}
+}
+.card-title {
+  font-size: rem-calc(18);
+  font-size: calc(18px +  4 * (100vw - 320px)/1180);
+  color: inherit;
+  font-weight: $global-weight-normal;
+  margin-bottom: 0.45rem;
+  line-height: 1.25;
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(22);
+	}
+  strong {
+    font-weight: $global-weight-bold;
+  }
+}
+.card-subtitle { 
+  color: lighten(saturate(adjust-hue($body-font-color,15), 1), 19);  // same as $fm-gray, but friendly to non-corp styles;
+  margin: 0.5em 0;
+}
+
+.card-blurb { 
+  @include show-for(medium);
+  font-size: rem-calc(14);
+  margin: 0.5em 0;
+}
+.card-blurb-large {
+  @include show-for(medium);
+  font-size: rem-calc(14);
+  font-size: calc(14px +  2 * (100vw - 320px)/1180);
+  font-weight: inherit;
+	@include breakpoint(xxlarge) {
+		font-size: rem-calc(16);
+	}
+}
+.video-length {
+  font-size: rem-calc(16);  
+  font-size: calc(16px +  5 * (100vw - 320px) / 1180);   
+  line-height: 1;
+  font-weight: $global-weight-normal;
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(21);
+  }
+}
+.snug {
+  line-height: 1.1;
+  margin-bottom: 0.75em;  
+}
+.file-flag {
+  color: get-color(alert);
+  font-variant: small-caps;
+  padding-left: 0.25em;
+  font-weight: $global-weight-medium;
+}
+.no-show {
+  position: absolute !important;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+}

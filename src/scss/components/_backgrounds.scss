@@ -1,0 +1,60 @@
+@media screen {
+  @each $name, $color in $orbit-palette { 
+    $current-contrast: color-contrast($color, $white);  
+    .background-#{$name} {
+      background-color: $color;  
+      @if ($current-contrast > 1.6) {
+        color: $white; 
+        hr { 
+          border-color: $white; 
+          opacity: 0.4;
+        }
+        .caret-in { 
+          background-color: $color;       
+        }        
+      }
+    }    
+  } 
+  .background-blue .background-primary {
+    background-color: rgba($primary-color, 0.6);
+  }
+  .background-concrete {
+    color: $body-font-color; // solves for when this is inside another background
+    .background-concrete {
+      background-color: darken($light-gray, 3.7%);
+    }    
+  }
+  .background-sheer {
+    .background-blue { 
+      background-color: rgba($fm-blue, .9);
+    }
+  }
+  .background-white {
+    color: $body-font-color; // solves for when this is inside another background
+  }
+  .background-offwhite {
+    background-color: $offwhite;   // is this needed? 
+  }
+  .background-pear {
+    background-color: $pear;
+  }
+  .background-celery {
+    background-color: $celery;  
+  }
+  .background-stripes {
+    background-image: linear-gradient(to left top, transparent 47%, rgba(0, 0, 0, 0.1) 0px, rgba(0, 0, 0, 0.1) 53%, transparent 0px);
+    background-size: 10px 10px;
+  }
+}
+.background-cover-center {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.highlight-yellow { 
+  background-color: rgba($fm-yellow,0.5); 
+  font-weight: 400; 
+  padding: 0 2px; 
+}

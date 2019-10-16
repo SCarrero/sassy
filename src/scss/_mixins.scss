@@ -1,0 +1,249 @@
+/// Adds styles for an orbit slide caption. 
+@mixin orbit-caption-custom(
+  $edge: bottom, 
+  $background: $orbit-caption-background, 
+  $padding: $orbit-caption-padding
+) {  
+  position: absolute;
+  @if($edge == bottom) {
+    top: auto;
+    bottom: 0;
+  }
+  @if($edge == top) {
+    bottom: auto;
+    top: 0;
+  }
+  width: 100%;
+  margin: 0;
+  padding: $padding;
+  background-color: $background;
+  color: color-pick-contrast($background);
+}
+
+
+// desktop hover states for parent of dropdowns
+@mixin nav-submenu-parent-hover(
+  $color: $fm-orange, 
+   $background: $white, 
+   $border-color: $white
+){
+  color: $color;
+  background: $background;
+  border-bottom-color: $border-color;
+  transition: color 0.2s ease 0s;
+}
+
+// link style for primary and secondary nav but not ribbon
+@mixin nav-desktop-link($color: $fm-gray, $activecolor: $fm-green){  
+  color: $color;
+  transition: color 0.2s ease 0s, border-bottom-color 0.2s ease 0s;   
+  &.active {
+    color: $activecolor;
+    border-bottom-color: darken(saturate(adjust-hue($pear,-1.73485), 12.69119), 1.96078);  
+  }
+  &:focus,
+  &:hover {
+    color: $activecolor;
+    border-bottom-color: $activecolor;            
+  }
+}
+@mixin list-divided($color: darken($light-gray, 5%), $padding-base: $global-padding, $last-border: false){      
+  > li { 
+    margin: 0;
+    padding-bottom: $padding-base;
+    border-bottom: 1px solid $color;     
+    + li {
+      padding-top: $padding-base;
+    }
+    > :last-child {
+      margin-bottom: 0;
+    }
+    @if ($last-border == false) {
+      &:last-child {
+        padding-bottom: 0;
+        border-bottom-width: 0;
+      }
+    }  
+  } 
+}
+//
+@mixin constrained-row(){
+  max-width: rem-calc(1400);
+  margin-left: auto;
+  margin-right: auto;   
+  padding-right: rem-calc(20);
+  padding-left: rem-calc(20); 
+  @include breakpoint(xlarge) {
+    padding-right: rem-calc(40);
+    padding-left: rem-calc(40); 
+    max-width: rem-calc(1400+60);
+  }
+  @include breakpoint(xxlarge) {
+    padding-right: rem-calc(50);
+    padding-left: rem-calc(50); 
+    max-width: rem-calc(1400+40+40);
+  }
+  &.column {
+    padding-right: rem-calc(30);
+    padding-left: rem-calc(30); 
+    @include breakpoint(large) {
+      padding-right: rem-calc(40);
+      padding-left: rem-calc(40);
+    }
+    @include breakpoint(xlarge) {
+      padding-right: rem-calc(60);
+      padding-left: rem-calc(60); 
+    }
+    @include breakpoint(xxlarge) {
+      padding-right: rem-calc(60);
+      padding-left: rem-calc(60); 
+    }
+  }
+}
+// anchors that aren't buttons, when used over dark backgrounds (modals, rotators, call outs, etc.)
+@mixin anchor-on-dark($decoration: underline){
+  &.block,
+  &.mailto,
+  &.icon,
+  &:not([class]) { 
+    color: currentColor;
+    position: relative;
+    text-decoration: $decoration;
+    box-decoration-break: clone;
+    &::after {
+      content: "";
+      position: absolute;
+      left: -5px; 
+      top: 0;
+      bottom: 0;
+      width: calc(100% + 10px);
+      height: 100%;
+      border-radius: 4px;
+      background: rgba($white, 0);
+      transition: background 0.25s ease 0s;       
+    }
+    &:hover::after,
+    &:focus::after  {
+      background: rgba($white, 0.2);
+    }
+    &:active::after  {
+      background: rgba($white, 0.3);
+      transition: none;
+    }
+  }
+  &.inline { 
+    color: currentColor;
+    position: relative;
+    border-radius: 4px;
+    background: rgba($white, 0);
+    transition: background 0.25s ease 0s; 
+    box-decoration-break: clone;    
+    &:hover,
+    &:focus  {
+      background: rgba($white, 0.2);
+    }
+    &:active  {
+      background: rgba($white, 0.3);
+      transition: none;
+    }
+  }  
+}
+// mixin to add rss feed icon to links in a list
+@mixin rss-list($color: $white) {
+  position: relative;
+  margin-bottom: 1rem;
+  &::before {
+    content: " ";
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    margin-right: 0.375em;
+    position: relative;
+    bottom: -0.1em;
+    background: transparent icon(rss, $color, 1rem, 1rem, 0, 0, 500, 460) no-repeat center center;
+  } 
+}
+// staggered mosiac full pattern used below secondary nav/hover and footer:
+@mixin mosaic-fill(
+  $a: $mosaic-first, 
+  $b: $mosaic-last, 
+  $direction: to right
+  ) {
+  background: linear-gradient($direction, 
+    color-shift($a, $b, 12, 2) 0%, 
+    color-shift($a, $b, 12, 1) 17%, 
+    color-shift($a, $b, 12, 4) 17%, 
+    color-shift($a, $b, 12, 3) 33%, 
+    color-shift($a, $b, 12, 6) 33%, 
+    color-shift($a, $b, 12, 5) 50%, 
+    color-shift($a, $b, 12, 8) 50%, 
+    color-shift($a, $b, 12, 7) 67%, 
+    color-shift($a, $b, 12, 10) 67%,  
+    color-shift($a, $b, 12, 9) 83%, 
+    color-shift($a, $b, 12, 12) 83%,  
+    color-shift($a, $b, 12, 11) 100%
+    );
+}
+
+// staggered mosiac pattern 12 steps:  currently not used
+@mixin mosaic-fill12(
+  $a: $mosaic-first, 
+  $b: $mosaic-last, 
+  $direction: to right
+  ) {
+  background: linear-gradient($direction, 
+    color-shift($a, $b, 12, 1) 0%, 
+    color-shift($a, $b, 12, 0) 8%,
+    color-shift($a, $b, 12, 2) 8%, 
+    color-shift($a, $b, 12, 1) 17%, 
+    color-shift($a, $b, 12, 3) 17%, 
+    color-shift($a, $b, 12, 2) 25%, 
+    color-shift($a, $b, 12, 4) 25%,  
+    color-shift($a, $b, 12, 3) 33%, 
+    color-shift($a, $b, 12, 5) 33%,   
+    color-shift($a, $b, 12, 4) 42%, 
+    color-shift($a, $b, 12, 6) 42%, 
+    color-shift($a, $b, 12, 5) 50%, 
+    color-shift($a, $b, 12, 7) 50%, 
+    color-shift($a, $b, 12, 6) 58%, 
+    color-shift($a, $b, 12, 8) 58%, 
+    color-shift($a, $b, 12, 7) 67%, 
+    color-shift($a, $b, 12, 9) 67%, 
+    color-shift($a, $b, 12, 8) 75%, 
+    color-shift($a, $b, 12, 10) 75%,   
+    color-shift($a, $b, 12, 9) 83%, 
+    color-shift($a, $b, 12, 11) 83%,   
+    color-shift($a, $b, 12, 10) 92%, 
+    color-shift($a, $b, 12, 12) 92%,  
+    color-shift($a, $b, 12, 11) 100%
+    );
+}
+
+// calculate color differences from beginning and ending color across number of steps, and return color at particular step
+// just pass a start color/end color, number of steps from one to the other, and the current step to get the color.
+@function color-shift($a, $b, $steps, $step) {
+  @if $step == 1 or $steps < 2 { 
+    @return $a;
+  }
+  @else if $step >= $steps {
+    @return $b;
+  }
+  @else {  
+    $shift: $step / $steps;
+    $sat: saturation($a) - saturation($b);
+    $lig: lightness($a) -  lightness($b);
+    $hue: hue($a) - hue($b);
+    @if $hue > 180 {
+      $hue: $hue - 360; 
+    }  
+    @else if $hue <= -180 {
+      $hue: $hue + 360;      
+    }
+    $hue2: adjust-hue($a, -$hue * $shift);
+    $sat2: if($sat > 0, desaturate($hue2, abs($sat) * $shift), saturate($hue2, abs($sat) * $shift));
+    $lig2:  if($lig > 0, darken($sat2, abs($lig) * $shift), lighten($sat2, abs($lig) * $shift));
+    @return $lig2;
+  }
+}
+   
+  

@@ -1,0 +1,30 @@
+.breadcrumb-wrapper {
+  background: $light-gray;
+  line-height: 1.25;
+  color: $fm-gray;
+  font-weight: $global-weight-normal;
+  @include breakpoint(xlarge) {
+    display: none;
+  }
+  ol {
+    margin: rem-calc(20 0 22);
+    padding: 0;
+  }
+  li { 
+    display: inline; 
+    position: relative;
+    padding-right: rem-calc(12);
+    margin: 0;
+    &:not(:last-child)::after {
+      content: '';  
+      background: transparent icon(chevron-right, "none", 13px, 12px, 0, 0, 28, 27, rgba($fm-gray, 0.5), 3) no-repeat right bottom;    
+      display: inline-block;
+      width: rem-calc(12);
+      height: 1em;
+      margin-right: rem-calc(-7);
+    }
+    a {
+      padding: 1px 1px 0 0;
+    }
+  }
+}

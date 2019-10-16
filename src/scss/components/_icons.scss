@@ -1,0 +1,554 @@
+// eventually ditch .stroke-anchor-on-dark
+.stroke-anchor-on-dark,
+.stroke-anchor {  
+  fill: none;
+  stroke: currentColor;
+  vertical-align: middle;
+  stroke-linejoin: round;
+  stroke-linecap: round;
+  stroke-miterlimit: 10;
+  transition: stroke 0.25s ease-out;
+  &.baseline {
+    vertical-align: baseline;
+  }
+}
+// eventually ditch .fill-anchor-on-dark
+.fill-anchor-on-dark,
+.fill-anchor {
+  fill: currentColor;
+  stroke: none;
+  opacity: 0.8;  
+  vertical-align: middle; 
+  transition: fill 0.25s ease-out;
+  &.baseline {
+    vertical-align: baseline;
+  }
+}
+//
+// supporting function to icon()
+// wraps contents in a <path> element with provided parameters
+@function svg-path($path, $parameters) {
+  $fill: '';
+  $stroke: '';
+  $style: '';
+  @if (map-get($parameters, fill) != '') { $fill: ' fill="#{map-get($parameters, color)}"'; }
+  @if (map-get($parameters, stroke-width) != 0) { $stroke: ' stroke="#{map-get($parameters, stroke-color)}" stroke-width="#{map-get($parameters, stroke-width)}"';  }
+  @if (map-get($parameters, css) != '') { $style: ' style="#{map-get($parameters, css)}"'; }
+  $icon: '<path#{$fill}#{$stroke}#{$style} d="#{$path}" />';
+  @return $icon;
+}
+//
+// supporting function to icon()
+// wraps contents in a <polygon> element with provided parameters
+@function svg-polygon($points, $parameters) {
+  $fill: '';
+  $stroke: '';
+  $style: '';
+  @if (map-get($parameters, fill) != '') { $fill: ' fill="#{map-get($parameters, color)}"'; }
+  @if (map-get($parameters, stroke-width) != 0) { $stroke: ' stroke="#{map-get($parameters, stroke-color)}" stroke-width="#{map-get($parameters, stroke-width)}"';  }
+  @if (map-get($parameters, css) != '') { $style: ' style="#{map-get($parameters, css)}"'; }
+  $icon: '<polygon#{$fill}#{$stroke}#{$style} points="#{$points}"></polygon>';
+  @return $icon;
+}
+//
+// supporting function to icon()
+// wraps contents in a <g> element with provided parameters
+@function svg-group($group, $parameters) {
+  $fill: '';
+  $stroke-color: '';
+  $stroke: '';
+  $style: '';
+  @if (map-get($parameters, fill) != '') { $fill: ' fill="#{map-get($parameters, color)}"'; }
+  @if (map-get($parameters, stroke-color) != "") { $stroke-color: ' stroke="#{map-get($parameters, stroke-color)}"';  }
+  @if (map-get($parameters, stroke-width) != 0) { $stroke: ' stroke-width="#{map-get($parameters, stroke-width)}"';  }
+  @if (map-get($parameters, css) != '') { $style: ' style="#{map-get($parameters, css)}"'; }
+  $icon: '<g#{$fill}#{$stroke-color}#{$stroke}#{$style}>#{$group}</g>';
+  @return $icon;
+}
+
+//
+// supporting function to icon()
+// build svg icon markup
+@function svg-icon($inner,$w,$h,$x,$y,$vw,$vh) {
+  $icon: '<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="#{$w}" height="#{$h}" viewBox="#{$x} #{$y} #{$vw} #{$vh}">#{$inner}</svg>';
+  @return $icon;
+}
+
+//
+//  Function to replace characters in a string
+//
+@function str-replace($string, $search, $replace: '') {
+  $index: str-index($string, $search); 
+  @if $index { @return str-slice($string, 1, $index - 1) + $replace + str-replace(str-slice($string, $index + str-length($search)), $search, $replace); }
+  @return $string; 
+}
+
+//
+//   supporting function to icon()
+//  Function to create an optimized svg url by replacing hte characters that are problematic 
+//
+@function svg-url($svg){
+  $svg: str-replace($svg,'"',"%22"); 
+  $svg: str-replace($svg,'<','%3C');
+  $svg: str-replace($svg,'>','%3E');
+  $svg: str-replace($svg,'&','%26');
+  $svg: str-replace($svg,'#','%23');
+  $svg: str-replace($svg,' ','%20');
+  $svg: str-replace($svg,'{','%7b');
+  $svg: str-replace($svg,'}','%7d');
+  @return url("data:image/svg+xml;charset=utf8,#{$svg}");   
+}
+
+// primary function for creating background svg icons
+// generate markup to apply an svg as a background element
+// use svg-path to apply parameters when the svg contains only 1 path
+// use svg-polygon to apply parameters when the svg contains only 1 polygon
+// use svg-group to apply parameters when the svg contains only 1 group
+// this aint meant for super complicated svgs - but it's a handy way to deal with simple ones
+@function icon(
+  $icon-name, 
+  $color, 
+  $width: 1rem, 
+  $height: 1rem, 
+  $vbox-min-x: 0, 
+  $vbox-min-y: 0, 
+  $vbox-width: 512, 
+  $vbox-height: 512, 
+  $stroke-color: '', 
+  $stroke-width: 0, 
+  $css: ''){
+  $parameters: ('color': $color,'stroke-color': $stroke-color,'stroke-width': $stroke-width,'css': $css);    
+  $icons: (
+    chevron-down: svg-path('M256 298.3l174.2-167.2c4.3-4.2 11.4-4.1 15.8.2l30.6 29.9c4.4 4.3 4.5 11.3.2 15.5L264.1 380.9c-2.2 2.2-5.2 3.2-8.1 3-3 .1-5.9-.9-8.1-3L35.2 176.7c-4.3-4.2-4.2-11.2.2-15.5L66 131.3c4.4-4.3 11.5-4.4 15.8-.2L256 298.3z', $parameters),
+    chevron-up: svg-path('M256 213.7L256 213.7 256 213.7l174.2 167.2c4.3 4.2 11.4 4.1 15.8-0.2l30.6-29.9c4.4-4.3 4.5-11.3 0.2-15.5L264.1 131.1c-2.2-2.2-5.2-3.2-8.1-3 -3-0.1-5.9 0.9-8.1 3L35.2 335.3c-4.3 4.2-4.2 11.2 0.2 15.5L66 380.7c4.4 4.3 11.5 4.4 15.8 0.2L256 213.7z', $parameters),
+    chevron-dbl: svg-path('M12 22l10-10L12 2M2 22l10-10L2 2', $parameters),
+    chevron-dbl-bg: svg-group('<polyline points="1.5 1.5 13 13 1.5 24.5"/><polyline points="13 1.5 24.5 13 13 24.5"/>', $parameters),
+    chevron-dbl-down: svg-group('<path d="M12.6 0L14 1.4 7 8 0 1.4 1.4 0 7 5.3 12.6 0z"/><path d="M12.6 5.4L14 6.7l-7 6.6-7-6.6 1.4-1.3L7 10.7l5.6-5.3z"/>', $parameters),
+    // angle-down: svg-polygon('366.6,160 386,180.7 196,352 6,180.7 25.3,160 196,310.5', $parameters),
+    chevron-right: svg-group('<polyline points="13 1.5 24.5 13 13 24.5"/>', $parameters),
+    chevron-left: svg-group('<polyline points="13 1.5 1 13 13 24.5"/>', $parameters),
+    // chevron-left: svg-path('M213.7 256L213.7 256 213.7 256 380.9 81.9c4.2-4.3 4.1-11.4-0.2-15.8l-29.9-30.6c-4.3-4.4-11.3-4.5-15.5-0.2L131.1 247.9c-2.2 2.2-3.2 5.2-3 8.1 -0.1 3 0.9 5.9 3 8.1l204.2 212.7c4.2 4.3 11.2 4.2 15.5-0.2l29.9-30.6c4.3-4.4 4.4-11.5 0.2-15.8L213.7 256z', $parameters),
+    close: svg-path('M83.7 0a83.7 83.7 0 1 0 83.7 83.7A83.7 83.7 0 0 0 83.7 0zm42.67 127.06a6.13 6.13 0 0 1-8.67-.07l-34-34.55L49.69 127a6.13 6.13 0 1 1-8.74-8.6L75.1 83.7 41 49a6.13 6.13 0 1 1 8.74-8.6L83.7 75l34-34.55a6.13 6.13 0 1 1 8.74 8.6L92.29 83.7l34.14 34.69a6.13 6.13 0 0 1-.06 8.67z', $parameters),
+    play: svg-group('<circle cx="100" cy="100" r="90"/><polygon points="70, 60 70, 145 145, 100" />',$parameters),
+    download: svg-group('<line x1="11.5" y1="0.75" x2="11.5" y2="17.35"/><polyline points="15.5 12.35 11.5 17.35 7.5 12.35"/><polyline points="9 7.75 3.5 7.75 3.5 23.75 19.5 23.75 19.5 7.75 14 7.75"/>', $parameters),
+    // arrow-right: svg-path('M322.7 128.4l100.3 105c6 5.8 9 13.7 9 22.4s-3 16.5-9 22.4L322.7 383.6c-11.9 12.5-31.3 12.5-43.2 0-11.9-12.5-11.9-32.7 0-45.2l48.2-50.4h-217c-17 0-30.7-14.3-30.7-32s13.7-32 30.6-32h217l-48.2-50.4c-11.9-12.5-11.9-32.7 0-45.2 12-12.5 31.3-12.5 43.3 0z', $parameters),
+    // arrow-left: svg-path('M189.3 128.4L89 233.4c-6 5.8-9 13.7-9 22.4s3 16.5 9 22.4l100.3 105.4c11.9 12.5 31.3 12.5 43.2 0 11.9-12.5 11.9-32.7 0-45.2L184.4 288h217c16.9 0 30.6-14.3 30.6-32s-13.7-32-30.6-32h-217l48.2-50.4c11.9-12.5 11.9-32.7 0-45.2-12-12.5-31.3-12.5-43.3 0z', $parameters),
+    // triangle-down: svg-polygon('0,0 16,0 8,12', $parameters),
+    // triangle-up: svg-polygon('0,12 16,12 8,0', $parameters),
+    triangle-right: svg-path('M.903.783L14.313 10 .904 19.217z', $parameters),
+    search: svg-path('M445 386.7l-84.8-85.9c13.8-24.1 21-50.9 21-77.9 0-87.6-71.2-158.9-158.6-158.9C135.2 64 64 135.3 64 222.9c0 87.6 71.2 158.9 158.6 158.9 27.9 0 55.5-7.7 80.1-22.4l84.4 85.6c1.9 1.9 4.6 3.1 7.3 3.1 2.7 0 5.4-1.1 7.3-3.1l43.3-43.8C449 397.1 449 390.7 445 386.7zM222.6 125.9c53.4 0 96.8 43.5 96.8 97 0 53.5-43.4 97-96.8 97 -53.4 0-96.8-43.5-96.8-97C125.8 169.4 169.2 125.9 222.6 125.9z', $parameters),
+    email: svg-path('M24 8.1c0-.6-.5-1.1-1.1-1.1H1.1C.5 7 0 7.5 0 8.1v14.8c0 .6.5 1.1 1.1 1.1h21.8c.6 0 1.1-.5 1.1-1.1V8.1zM8.2 16.5l3 2.9c.4.4 1.2.4 1.6-.1l3-2.8 5.3 5.5H2.9l5.3-5.5zM2 21.1V10l5.5 5.5L2 21.1zm14.5-5.6L22 10v11.1l-5.5-5.6zM22 9v-.4l-10 9.9L2 8.6V9h20z', $parameters),
+    mailto: svg-group('<path d="M22.5 17c0 .828-.672 1.5-1.5 1.5H3c-.828 0-1.5-.672-1.5-1.5V6c0-.83.672-1.5 1.5-1.5h18c.828 0 1.5.67 1.5 1.5v11z"/><path d="M22 5l-10 8L2 5"/>', $parameters),
+    menu: svg-group('<rect width="28" height="3" rx="3" ry="3"/><rect y="10" width="28" height="3" rx="3" ry="3"/><rect y="20" width="28" height="3" rx="3" ry="3"/>', $parameters),
+    menu-close: svg-path('M443.6 387.1L312.4 255.4l131.5-130c5.4-5.4 5.4-14.2 0-19.6l-37.4-37.6c-2.6-2.6-6.1-4-9.8-4 -3.7 0-7.2 1.5-9.8 4L256 197.8 124.9 68.3c-2.6-2.6-6.1-4-9.8-4 -3.7 0-7.2 1.5-9.8 4L68 105.9c-5.4 5.4-5.4 14.2 0 19.6l131.5 130L68.4 387.1c-2.6 2.6-4.1 6.1-4.1 9.8 0 3.7 1.4 7.2 4.1 9.8l37.4 37.6c2.7 2.7 6.2 4.1 9.8 4.1 3.5 0 7.1-1.3 9.8-4.1L256 313.1l130.7 131.1c2.7 2.7 6.2 4.1 9.8 4.1 3.5 0 7.1-1.3 9.8-4.1l37.4-37.6c2.6-2.6 4.1-6.1 4.1-9.8C447.7 393.2 446.2 389.7 443.6 387.1z', $parameters),
+    chevron-right-circle: svg-group('<circle fill="none" stroke-width="4.5" cx="32" cy="32" r="29.5" /><path stroke-width="1" d="M26.4 47.4l-2.8-2.8L36.2 32 23.6 19.4l2.8-2.8L41.8 32"/>',$parameters),
+    rss: svg-group('<path d="M119.9 336.1c-30.8 0-55.9 25.1-55.9 55.8 0 30.8 25.1 55.6 55.9 55.6 30.9 0 55.9-24.9 55.9-55.6 0-30.7-25-55.8-55.9-55.8z"/><path d="M64 192v79.9c48 0 94.1 14.2 128 48.1 33.9 33.9 48 79.9 48 128h80c0-139.9-116-256-256-256z"/><path d="M64 64v79.9c171 0 303.9 133 303.9 304.1H448C448 236.3 276 64 64 64z"/>',$parameters),
+    padlock: svg-path('M86.4 480h339.2c12.3 0 22.4-9.9 22.4-22.1V246c0-12.2-10-22-22.4-22H404v-30.9c0-41.5-16.2-87.6-42.6-115.4-26.3-27.8-64-45.7-105.3-45.7h-.2c-41.3 0-79 17.9-105.3 45.6C124.2 105.4 108 151.5 108 193v31H86.4C74 224 64 233.9 64 246v211.9c0 12.2 10 22.1 22.4 22.1zM161 193.1c0-27.3 9.9-61.1 28.1-80.3v-.3C206.7 93.9 231 83 255.9 83h.2c24.9 0 49.2 10.9 66.8 29.5v.2l-.1.1c18.3 19.2 28.1 53 28.1 80.3V224H161v-30.9z', $parameters),
+    reset-field: svg-group('<line fill="none" stroke-width="3" x1="0.5" y1="0.5" x2="23.5" y2="23.5"/><line fill="none" stroke-width="3" x1="23.5" y1="0.5" x2="0.5" y2="23.5"/>',$parameters),
+  );
+
+  $icon: svg-icon(map-get($icons, $icon-name), $width, $height, $vbox-min-x, $vbox-min-y, $vbox-width, $vbox-height);
+  @return svg-url('#{$icon}');
+}
+
+.secured {
+  position: relative;
+  overflow: visible;
+  &::after {
+    content: '';
+    position: relative;
+    display: inline-block;
+    margin-left: 0.3em;
+    background: transparent icon(padlock, $anchor-color, 32px, 32px) no-repeat center center / contain;
+    width: 1em;
+    height: 1em; 
+    transition: background 0.25s ease-out;
+  }
+  &:hover,
+  &:focus {
+    &::after {      
+      background: transparent icon(padlock, $anchor-color-hover, 32px, 32px) no-repeat center center / contain;  
+    }
+  }  
+  &.button {
+    &::after {
+      background: transparent icon(padlock, $white, 32px, 32px) no-repeat center center / contain;
+      margin-right: -0.25em;
+    }
+    &:not(.hollow):hover,
+    &:not(.hollow):focus {
+      &::after {
+        background: transparent icon(padlock, $fm-gray, 32px, 32px) no-repeat center center / contain;
+      }
+    }
+  }    
+  @each $name, $color in $button-palette {
+    &.button.#{$name}:hover::after,
+    &.button.#{$name}:focus::after {
+      background: transparent icon(padlock, $color, 32px, 32px) no-repeat center center / contain;
+    }
+  } 
+}
+.secured-white {
+  position: relative;
+  overflow: visible;
+  color: $white;
+  &::after {
+    content: '';
+    position: relative;
+    display: inline-block;
+    margin-left: 0.3em;
+    background: transparent icon(padlock, $white, 32px, 32px) no-repeat center center / contain;
+    width: 1em;
+    height: 1em; 
+    transition: background 0.25s ease-out;
+  }
+  &:hover,
+  &:focus {
+    &::after {
+      background: transparent icon(padlock, $white, 32px, 32px) no-repeat center center / contain;  
+    }
+  }
+}
+.icon-chevron-right-circle-blue {
+  position: relative;
+  overflow: visible;
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: 0.1em;
+    left: -2em;
+    background: transparent icon(chevron-right-circle, $primary-color, 32px, 32px, 0, 0, 66, 66, $primary-color) no-repeat center center /contain;
+    width: 1em;
+    height: 1em;
+  }
+}
+
+.icon-chevron-right-circle {
+  position: relative;
+  font-size: calc(22px +  10 * (100vw - 320px) / 1180); 
+  @include breakpoint(xxlarge) { font-size: rem-calc(32); }
+  &::before {
+    content: '';
+    position: absolute;
+    display: block;
+    top: $gutter * 2;
+    left: 1.25em;
+    background: transparent icon(chevron-right-circle, $white, 32px, 32px, 0, 0, 66, 66, $white) no-repeat center center /contain;
+    width: 1.1em;
+    height: 1.1em;
+  }
+}
+
+.icon-chevron-right-double {
+  position: relative;
+  display: inline-block;
+  line-height: 1.1;
+  &::after {
+    content: ' ';  
+    background: transparent icon(chevron-dbl, "none", 24px, 24px, 0, 0, 24, 24, $anchor-color, 2) no-repeat right center /contain;    
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    position: relative;
+    top: 0.1em;
+    margin-left: 0.2em;
+  }
+}
+.icon-chevron-right {
+  position: relative;
+  display: block;
+  line-height: 1.1;
+  transition: background 0.25s ease-out;
+  &::after {
+    content: ' ';  
+    background: transparent icon(chevron-right, "none", 16px, 16px, 0, 0, 30, 30, $anchor-color, 3) no-repeat right top / cover;    
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    position: relative;
+    top: 0.17em;
+  }
+  &:hover,
+  &:focus {
+    &::after {
+      background: transparent icon(chevron-right, "none", 16px, 16px, 0, 0, 30, 30, $anchor-color-hover, 3) no-repeat right top / cover;   
+    }
+  }
+}
+.icon-chevron-left {
+  position: relative;
+  display: block;
+  line-height: 1.1;
+  transition: background 0.25s ease-out;
+  &::before {
+    content: ' ';  
+    background: transparent icon(chevron-left, "none", 16px, 16px, 0, 0, 30, 30, $anchor-color, 3) no-repeat right top / cover;    
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    position: relative;
+    top: 0.17em;
+  }
+  &:hover,
+  &:focus {
+    &::before {
+      background: transparent icon(chevron-left, "none", 16px, 16px, 0, 0, 30, 30, $anchor-color-hover, 3) no-repeat right top / cover;   
+    }
+  }
+}
+.icon-chevron-right-white {
+  display: inline-block;
+  position: relative;  
+  &::after {
+    content: ' ';  
+    background: transparent icon(chevron-right, "none", 16px, 16px, 0, 0, 30, 30, $white, 3) no-repeat right top / cover;   
+    width: 1em;
+    height: 1em;
+    display: inline-block;
+    position: relative;
+    top: 0.17em;
+  }
+}
+.icon-download {
+  position: relative;
+  padding-right: 0.5em;
+  display: inline-block;
+  &::after {
+    content: '';
+    display: inline-block; 
+    position: relative;
+    width: 1em;
+    height: 1em;
+    margin-left: 0.375em;
+    background: transparent icon(download, 'none', 24px, 24px, 0, 0, 24, 24.5, $fm-gray, 1.5) no-repeat right center /contain;
+  }
+}
+.icon-download-white {
+  position: relative;
+  display: inline-block;
+  color: $white;
+  &::after {
+    content: '';
+    display: inline-block; 
+    position: relative;
+    width: 1em;
+    height: 1em;
+    margin-left: 0.375em;
+    background: transparent icon(download, 'none', 24px, 24px, 0, 0, 24, 24.5, $white, 1.5) no-repeat right center /contain;
+  }
+}
+.icon-required {
+  position: relative;
+  &::after {
+    content: '*';
+    display: inline-block; 
+    position: relative;
+    width: 0.75em;
+    height: 1em;
+    color: $fm-red;
+    text-align: right;
+  }
+  .outline &:not(.is-invalid-label)::after {    
+    color: $white;
+  }
+}
+
+.icon {
+  &.secondary { 
+    color: $fm-orange;  
+    transition: color 0.25s ease-out;
+    &:hover,
+    &:focus {
+      color: scale-color($fm-orange, $lightness: -10%);   
+    }
+    &:active {
+      color: scale-color($fm-orange, $lightness: -20%);
+    }
+  }
+  svg { 
+    height: 1em;
+    width: 1em;
+    transition: fill 0.25s ease-out, stroke 0.25s ease-out;
+  }
+}
+
+.svg-wrapper-round-primary {   // class for div containers holding svgs
+  position: relative; 
+  display: block;
+  top: - rem-calc(75 + $gutter + 4)/2; // (half of (icon height + 4px border + gutter)  
+  background-color: $primary-color;
+  width: rem-calc(75);
+  height: rem-calc(75);
+  border-radius: 50%;
+  border: 0.25rem solid white;
+  margin: 0 auto (- rem-calc(75 + $gutter + 4)/2);
+  z-index: 355;
+  svg {
+    max-width: 3rem;
+    @include absolute-center; 
+  } 
+}
+.mailto {   // class for anchors
+  position: relative;
+  display: inline-block;
+  &::before {
+    content: '';
+    display: inline-block; 
+    position: relative;
+    width: 1.25em;
+    height: 1.25em;
+    margin-right: 0.4em;
+    vertical-align: text-top;
+    background: transparent icon(mailto, none, 1.25em, 1.25em, 0, 0, 24, 24, scale-color($anchor-color, $lightness: -5%), 1.35) no-repeat left bottom / contain;
+  }
+  .accent-yellow & { 
+    &::before {
+      background: transparent icon(mailto, none, 1.25em, 1.25em, 0, 0, 24, 24, $fm-yellow, 1.4) no-repeat left bottom / contain;
+    }
+  }
+}
+
+.icon-calendar {   // class for svgs
+  width: rem-calc(72);
+  height: rem-calc(72);
+  fill: $fm-green;
+  text {
+    text-transform: uppercase;
+    text-anchor: middle;
+    font-family: $body-font-family;
+  }
+ .text1 { 
+   fill: $fm-gray; 
+    font-size: 120px;
+    font-weight: $global-weight-black;
+    
+ }
+ .text2 { 
+   fill: $white; 
+    font-size: 150px;
+    font-weight: $global-weight-bold;
+ }
+}
+.icon-application {  // class for svgs
+  width: 30px;
+  height: 30px;
+  padding: 15px;
+  .iw_columns.large-7 & {
+    @media screen and (min-width: -zf-bp-to-em(map-get($breakpoints, medium))) and (max-width: -zf-bp-to-em(map-get($breakpoints, medium) + 80px)) {
+      width: 22px;
+      height: 22px;
+      padding: 15px 10px;  
+    }
+    @include breakpoint(large only) {
+      width: 25px;
+      height: 25px;
+      padding: 15px 10px;  
+    }
+  }
+}
+
+.icon-file {     // class is appended by js
+  border: 0.0525em solid;
+  display: inline-block;
+  font-size: 75%;
+  font-variant: small-caps;
+  line-height: 0.8;
+  margin: 0 0.125em;
+  padding: 0.0625em 0.125em 0.125em;
+  vertical-align: 20%;
+  font-weight: $global-weight-light;
+  font-style: normal;
+  font-family: $body-font-family;
+  .button & {
+    line-height: 0.9; 
+    font-size: 80%; 
+    padding-top: 0.125em;
+  }
+  @media print {
+    display: none;
+  }
+}
+
+li {
+  &.file-pdf,
+  &.file-zip,
+  &.file-csv,
+  &.file-doc,
+  &.file-xls,
+  &.file-ppt,
+  &.file-htm {
+    background-repeat: no-repeat;
+    padding-left: 2em;
+    background-position: left top;
+  
+  }
+  &.file-pdf {
+    background-image:url("/images/icon_file-pdf.svg");
+  }
+  &.file-zip {
+    background-image:url("/images/icon_file-zip.svg");
+  }
+  &.file-csv {
+    background-image:url("/images/icon_file-csv.svg");
+  }
+  &.file-doc {
+    background-image:url("/images/icon_file-words.svg");
+  }
+  &.file-xls {
+    background-image:url("/images/icon_file-excel.svg");
+  }
+  &.file-ppt {
+    background-image:url("/images/icon_file-powerpoint.svg");
+  }
+  &.file-htm {
+    background-image:url("/images/icon_file-html.svg");
+  }
+}
+
+.icon-deal-marker {
+  font-weight: $global-weight-normal;
+  line-height: 1;
+  margin-bottom: 0.3125em;
+    font-size: rem-calc(18);
+  font-size: calc(18px +  6 * (100vw - 320px)/1180);
+  @include breakpoint(xlarge){    
+    font-size: rem-calc(24);
+  } 
+  &.large {
+    font-size: 1.5rem;
+    font-size: calc(24px +  8 * (100vw - 320px)/1180);
+    @include breakpoint(xlarge){    
+      font-size: 2rem;
+    }  
+  }
+  &.xlarge {
+    font-size: rem-calc(38);
+    font-size: calc(38px +  14 * (100vw - 320px)/1180);
+    @include breakpoint(xlarge){    
+      font-size: rem-calc(52);
+    }  
+    .marker {
+      margin: 0 0.4em 0 0; 
+    }
+  }
+  svg {
+    fill: none;
+    stroke: $fm-gray;
+    stroke-width: 2;
+  }    
+  .marker {
+    position: relative;
+    display: inline-block;
+    text-align: center;
+    line-height: 1;
+    font-size: 83.3%;
+    border-radius: 999px;
+    font-weight: $global-weight-black;
+    height: 2.05em;
+    width: 2.05em;
+    padding: 0.5em 0;
+    margin: 0.3125em 0.3em 0.25em 0;   
+  }  
+}

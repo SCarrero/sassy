@@ -1,0 +1,226 @@
+.orbit-container-insert,
+.orbit-controls-outside {
+  margin-left: 1rem;
+  margin-right: 1rem;
+  @include breakpoint(medium){
+    margin-left: 2rem;
+    margin-right: 2rem;
+  }
+  @include breakpoint(large){
+    margin-left: 3rem;
+    margin-right: 3rem;
+  }  
+  .orbit-previous, 
+  .orbit-next {
+    background: none;
+    padding: 0;
+    color: currentColor;
+    font-size: 1.5rem;
+    @include breakpoint(medium){
+      font-size: 2.5rem;
+    }
+    @include breakpoint(large){
+      font-size: 3rem;
+    }
+    @include breakpoint(xlarge){
+      font-size: 3.5rem;
+    }
+    svg {
+      opacity: 0.25;
+    }
+    &:hover,
+    &:focus,
+    &:active {
+      svg {
+        opacity: 0.45;
+      }  
+    }    
+  }
+  .orbit-previous {
+    left: -1.25em;
+  } 
+  .orbit-next {
+    right: -1.25em;
+  }
+}
+.orbit-bullets {
+  line-height: 1;
+  font-size: 1.125rem;
+  padding-bottom: rem-calc(12);
+  button {
+    vertical-align: middle;
+  }
+  &.bullets-white {
+    margin-top: 0.75rem;
+    button {
+      background-color: rgba($white,0.7);
+      &:hover,
+      &.is-active {
+        background-color: $white;
+      }
+    }
+  }
+  &.bullets-tan {
+    margin-top: 0.75rem;
+    button {
+      background-color: rgba(#F5EFDF,0.7);
+      &:hover,
+      &.is-active {
+        background-color: #F5EFDF;
+      }
+    }
+  }
+} 
+
+.orbit-container > .orbit-controls > .orbit-bullets {
+  position:absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+}
+.orbit-previous, 
+.orbit-next {
+  font-size: 1.35rem;
+  background: rgba($black, 0.2);
+  border-radius: 0;
+  svg { 
+    fill: currentColor; 
+    stroke: currentColor;
+    stroke-width: 10px;
+    vertical-align: top;
+    stroke-linecap:round;
+    stroke-linejoin:round;
+    stroke-miterlimit:20;
+    transition: opacity 0.25s ease;
+  }  
+  @include breakpoint(large) {
+    font-size: 1.65rem;
+  }
+  .overlay-gallery & {
+    svg {
+      stroke-width: 1px;
+    }
+  }
+}  
+.orbit-image { 
+  border-width: 0;
+}
+.orbit-container {
+  .orbit-slide {  // increasing specificity
+    margin-bottom: 0;
+    margin-top: 0; 
+  }
+}
+.orbit-slide {
+  min-height: 100%;
+  font-size: rem-calc(15); 
+  font-size: calc(15px +  4 * (100vw - 320px)/1180);
+  @include breakpoint(xxlarge) {
+    font-size: rem-calc(19); 
+  } 
+  >.callout.large {
+    padding-left: $gutter * 2;
+    padding-right: $gutter * 2;  
+    padding-bottom: $gutter * 2; 
+  }
+  figure {
+    @include clearfix;
+    img + figcaption {
+      margin-top: 0;
+    }
+  }
+  figcaption { 
+    @include clearfix;
+    blockquote {
+      padding: rem-calc(1 15 1 10);
+    }
+    :last-child { margin-bottom: 0;}
+  }
+  .orbit-title {
+    @include orbit-caption-custom(top, rgba($white, 0.5), 0.5rem);
+    text-shadow: 0px 0px 1px $white;
+    font-weight: $global-weight-medium;
+    text-align: center;
+  
+  }
+  .orbit-caption { 
+    font-size: inherit;
+    text-align: center;
+    font-weight: $global-weight-normal;
+    text-shadow: 0px 0px 1px $black;
+    @include breakpoint(small only) {
+      padding: $orbit-caption-padding * .75;
+    }
+  }
+
+
+}
+.orbit-controls {
+  line-height: 1;
+  width: 100%;
+  text-align: center;
+}
+ 
+.bullets-overlay {
+  .orbit-controls {  
+    position: absolute;
+    bottom: 0;
+  }
+  .orbit-slide {
+    padding-bottom: $global-padding * 3;
+  }    
+  .orbit-bullets {
+    display: inline-block;   
+    margin: $orbit-bullet-margin / 2;     
+    button {
+      background: $white;
+    }    
+  }
+  button {
+    display: inline-block;
+    opacity: 0.7;
+      &:hover,
+      &:focus {
+        opacity: 0.9;
+      }
+      &.is-active {
+        opacity: 1;
+      }      
+  }
+  .orbit-previous, 
+  .orbit-next {
+    background: none;
+    position: static;
+    padding: 0;
+    vertical-align: middle;
+    transform: none;
+    font-size: 1.125rem;
+    svg {
+      stroke-width: 30px;
+    }
+  } 
+}
+
+.orbit-controls-raised {
+  .orbit-previous,
+  .orbit-next { 
+    top: 40%;
+    @include breakpoint(large) {
+      top: 28%; 
+    }
+  }
+}
+// speed up transition when mobile nav is expanded
+.is-mobile-expanded .slide-in-left.mui-enter,
+.is-mobile-expanded .slide-out-left.mui-enter,
+.is-mobile-expanded .slide-out-right.mui-leave,
+.is-mobile-expanded .slide-in-right.mui-enter {
+  transition-duration: 10ms !important;
+}
+
+// hide slides when mobile nav is expanded
+.is-mobile-expanded .orbit-slide,
+.is-mobile-expanded .orbit-controls { 
+  opacity: 0; 
+  background: none; 
+}

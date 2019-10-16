@@ -1,0 +1,63 @@
+.pre-footer-promo {
+  margin: 0;
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  @include breakpoint (large) {
+    padding-bottom: $global-padding * 2;
+  }
+  position: relative;
+}
+.footer-promo {  
+  padding-top: 2.5rem;
+  padding-bottom: 2.5rem;
+  margin: 0;
+  position: relative;  
+  font-size: rem-calc(16);
+  font-size: calc(16px +  6 * (100vw - 320px)/1180); 
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(22);
+	}
+  @include breakpoint(large) {
+    padding-top: rem-calc(70);
+    padding-bottom: rem-calc(70);
+  }    
+  p {
+    font-weight: $global-weight-light;
+    margin: 1.5rem 0;
+    @include breakpoint(large) {   
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+  }
+  > .column {
+    position: relative;
+  }
+}
+.footer-promo-cta { 
+  width: 100%;      
+  @media screen and #{breakpoint(large)} {              
+    @include vertical-center;
+    right: 0;
+    text-align: right;
+    position: relative;
+  }
+}
+
+.footer-form {      // may not be needed?
+  width: 100%; 
+  @include breakpoint(medium only) {
+    margin: 0 auto;
+    max-width: rem-calc(400);    
+  }
+  > * {
+    vertical-align: middle;
+    margin: 0.25rem 0;
+  }
+}
+
+@media print {
+  .footer-promo .column { 
+    width: 100%;
+  }
+}

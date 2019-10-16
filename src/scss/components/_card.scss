@@ -1,0 +1,187 @@
+/// card
+.card {
+  position: relative;
+  border-bottom-width: 3px;
+	.overlay,
+  .modal-launch,
+  .video-modal {
+		width: 100%;
+	}
+  .avatar {
+    @media screen {
+      color: $fm-gray;
+      position: absolute;
+      left: $gutter;
+      right: $gutter;
+      bottom: $gutter;
+      margin: 0;    
+    }
+  } 
+}
+
+.chevron-base,
+.grid-block .callout.chevron-base {
+  position: relative;
+  padding-bottom: calc(40px +  26 * (100vw - 320px)/1180);    
+  z-index: 205;
+  @include breakpoint(xlarge) { 
+    padding-bottom: rem-calc(66); 
+  }
+}
+.chevron {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1em;
+  font-size: rem-calc(30);  
+  font-size: calc(30px +  15 * (100vw - 320px)/1180);
+  @include breakpoint(xlarge) { 
+    font-size: rem-calc(45); 
+  }
+  &::after {
+    content: ' ';  
+    background: transparent icon(chevron-dbl-bg, "none", 26px, 26px, -1, -1, 27.5, 27.5, $white, 3, "stroke-linejoin: round; stroke-linecap: round;") no-repeat center bottom /contain;    
+    width: 1em;
+    height: 1em;
+    display: block;
+    position: absolute;
+    bottom: 19px;
+    left: 0;
+    right: 0;
+    margin: 0 auto;
+    opacity: 0.4;
+  }
+}
+.divider-flex {
+  display: -webkit-flex;
+  display: flex;
+  -webkit-align-items: center;
+  align-items: center;
+  h2,
+  h3  {
+    -webkit-flex:  1 1 auto;
+    flex: 1 1 auto;
+    margin-bottom: 0;
+  }
+}
+
+.card-section { 
+  &:not(.text-center) {
+    padding-left: 0;
+    @include breakpoint(medium) {
+      padding-right: $gutter * 2;
+    }    
+  }
+}
+.card-divider {
+  position: relative;
+}
+.perspectives {
+  @media screen {
+    .card { 
+      margin-top: $gutter * 2.5;
+      margin-bottom: 0;
+    }
+    .card-divider {
+      padding-bottom:  $gutter * 5.3;
+      border-bottom: $gutter solid $white;
+      &.double-avatar { 
+        padding-bottom: 150px; 
+      } 
+    }
+  }
+} 
+
+.pre-footer-promo.background-concrete {
+  @media screen {
+    .card { 
+      margin-top: $gutter/2;
+      position: relative;
+      &::after {
+        content: " ";
+        display: block;
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        height: $gutter;
+        background-color: $light-gray;
+      }
+      > .card-divider:not([data-equalizer-watch]) {
+        margin-bottom: $gutter;
+      }
+    }
+  }
+}
+
+@media screen and #{breakpoint(medium)} {
+  &.medium-up-4 {
+    @for $i from 1 through 4 {
+      > div:nth-child(4n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 4, $i);
+      }
+    }    
+  }
+  &.medium-up-3 {
+    @for $i from 1 through 3 {
+      > div:nth-child(3n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 3, $i);
+      }
+    }  
+  }
+  &.medium-up-2 {
+    @for $i from 1 through 2 {
+      > div:nth-child(2n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 3, $i);
+      }
+    }  
+  }
+}
+@media screen and #{breakpoint(large)} {
+  &.large-up-4 {
+    @for $i from 1 through 4 {
+      > div:nth-child(4n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 4, $i);
+      }
+    }    
+  }
+  &.large-up-3 {
+    @for $i from 1 through 3 {
+      > div:nth-child(3n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 3, $i);
+      }
+    }  
+  }
+  &.large-up-2 {
+    @for $i from 1 through 2 {
+      > div:nth-child(2n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 3, $i);
+      }
+    }  
+  }
+}
+
+@media screen and #{breakpoint(xlarge)} {
+  &.xlarge-up-4 {
+    @for $i from 1 through 4 {
+      > div:nth-child(4n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 4, $i);
+      }
+    }    
+  }
+  &.xlarge-up-3 {
+    @for $i from 1 through 3 {
+      > div:nth-child(3n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 3, $i);
+      }
+    }  
+  }
+  &.xlarge-up-2 {
+    @for $i from 1 through 2 {
+      > div:nth-child(2n+#{$i}) > .card {
+        border-bottom-color: color-shift($fm-green, $pear, 3, $i);
+      }
+    }  
+  }
+}

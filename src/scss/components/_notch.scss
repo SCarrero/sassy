@@ -1,0 +1,34 @@
+.notch-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.notch-top-v {
+  bottom: 0;
+  position: absolute;
+  width: 100%;
+  min-height: 1rem;
+  + .notch-top-v {
+    bottom: rem-calc(-10);
+  }
+  &::before, &::after {
+    background-color: inherit;
+    bottom: 100%;
+    content: "";
+    position: absolute;
+    width: 50%;
+    min-height: 2.5rem;
+  }
+
+  &::before {
+    right: 50%;
+    transform: skewX(65deg);
+    transform-origin: 100% 100%;
+  }
+
+  &::after {
+    left: 50%;
+    transform: skewX(-65deg);
+    transform-origin: 0 100%;
+  }
+}
+

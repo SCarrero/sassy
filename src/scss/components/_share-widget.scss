@@ -1,0 +1,56 @@
+.share-wrapper {
+  background: $light-gray;
+  padding-top: $global-padding;
+  padding-bottom: $global-padding;
+  .hero-blended > &, 
+  .page-title > & {
+    background: none; 
+    padding-top: 0;
+    padding-bottom: 0;
+    position: absolute;
+    bottom: -17px;  // half of height of .share-widget
+    left: 0;
+    right: 0;  
+    text-align: left;
+  }
+}
+.share-widget {
+  padding: 0 8px;
+  background: $fm-green;
+  color: $white;
+  height: 34px;
+  display: inline-block;
+  position: relative;
+  border-radius: $button-radius;
+  float: left;
+  z-index: 210;
+  font-weight: $global-weight-normal;
+  line-height: 1;  
+  font-size: 16px;
+  box-shadow: 0px 8px 8px -7px rgba($black,0.2);
+  .share-title {
+    float: left;
+    height: 34px;
+    padding:0 5px 0 6px;
+    & > * {    
+      float: left;
+      display: block;
+      padding: 9px 3px 0 0; 
+      vertical-align: middle;
+    }
+  }
+  a:hover {
+    opacity: 0.75;
+  }
+  .share-links {
+    background: linear-gradient(to right, rgba(0,0,0,0.13) 0%,rgba(0,0,0,0) 7%); 
+    float:left;
+    height: 34px;
+    padding: 0 4px 0 8px;
+    & > * {    
+      float: left;
+      display: block;
+      padding: 7px 6px 9px;
+    }
+  }
+}

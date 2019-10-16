@@ -1,0 +1,44 @@
+// Odometer redone with text instead of sprites //
+.number-channel {
+  height: 1.2em;
+  overflow: hidden;
+	font-size: rem-calc(26);
+  font-size: calc(26px +  50 * (100vw - 320px)/1180);
+  line-height: 1em;
+  @include breakpoint(xxlarge) { 
+    font-size: rem-calc(76);
+  } 
+  $transition-delay: 1.1;
+  > div {
+    transform: translateY(0);
+    @for $i from 1 through 11 {
+      &:nth-child(#{$i}).animate {
+        transition-delay: ($transition-delay - $i/10) + s;
+      }
+    } 
+    &.animate {
+      transform: translateY(-1.2em * 10);
+      transition-property: transform;
+      transition-timing-function: linear;
+      transition-duration: 1.6s;
+    }    
+  }  
+} 
+.stack {
+  position: relative;
+  display: inline-block;
+  > div {
+    height: 1.2em;
+    width: 1em;
+    padding: 0.1em 0;
+    color: $fm-green;
+    &:nth-of-type(even) {
+      //background: #eee;
+    }
+    &:nth-of-type(odd) {
+      //background: #fee;
+    }
+  }
+}
+
+
