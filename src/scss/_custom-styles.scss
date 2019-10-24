@@ -1,19 +1,26 @@
+
+.text-flex-32-72 {
+  font-size: rem-calc(32);
+  font-size: calc(32px +  40 * (100vw - 320px)/1180);
+  @include breakpoint(xxlarge) {
+		font-size: rem-calc(72);
+	}
+}
+
 // Odometer redone with text instead of sprites //
 .number-channel {
   height: 1.2em;
   overflow: hidden;
-	font-size: rem-calc(26);
-  font-size: calc(26px +  50 * (100vw - 320px)/1180);
   line-height: 1em;
-  @include breakpoint(xxlarge) { 
-    font-size: rem-calc(76);
-  } 
+  display: inline-flex;
+  flex-direction: row;
+  flex-wrap: wrap;
   $transition-delay: 1.1;
   > div {
-    transform: translateY(0);
-    @for $i from 1 through 11 {
+    transform: translateY(1em);
+    @for $i from 1 through 12 {
       &:nth-child(#{$i}).animate {
-        transition-delay: ($transition-delay - $i/10) + s;
+        transition-delay: ($transition-delay - $i/12) + s;
       }
     } 
     &.animate {
@@ -25,20 +32,15 @@
   }  
 } 
 .stack {
-  position: relative;
-  display: inline-block;
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+    flex: 1; 
+    padding: 0;
+    margin: 0;
   > div {
-    height: 1.2em;
-    width: 1em;
-    padding: 0.1em 0;
-    color: $fm-green;
-    &:nth-of-type(even) {
-      //background: #eee;
-    }
-    &:nth-of-type(odd) {
-      //background: #fee;
-    }
+    height: 1.1em;
+    margin: 0.1em 0.05em 0;
   }
 }
-
 
