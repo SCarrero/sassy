@@ -1,7 +1,7 @@
 {
   "name": "sassy",
   "version": "1.0.0",
-  "description": "ZURB Template Variant Used by FM",
+  "description": "Simplieid template for SCSS Development",
   "main": "gulpfile.babel.js",
   "scripts": {
     "start": "gulp"
