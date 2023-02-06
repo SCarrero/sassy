@@ -18,7 +18,7 @@
     "@babel/core": "7.20.12",
     "@babel/preset-env": "7.20.2",
     "@babel/register": "^7.4.4",
-    "autoprefixer": "^9.6.0",
+    "autoprefixer": "^10.4.13",
     "browser-sync": "^2.26.5",
     "gulp": "^4.0.0",
     "gulp-babel": "^8.0.0",
