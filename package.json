@@ -16,7 +16,7 @@
   },
   "devDependencies": {
     "@babel/core": "7.23.0",
-    "@babel/preset-env": "7.22.20",
+    "@babel/preset-env": "7.23.2",
     "@babel/register": "^7.4.4",
     "autoprefixer": "^10.4.13",
     "browser-sync": "^2.26.5",
